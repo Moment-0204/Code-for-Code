@@ -23,6 +23,11 @@
     }
 </style>
 <script>
+    var co=0;
+    function C() {
+        co++;
+        if(co===3)alert("N");
+    }
 </script>
 </head>
 <body>
@@ -32,7 +37,7 @@
 <a href="http://clair.si.umich.edu/naclobase/get.cgi?pid=196&version=1">言語学の過去問集(guest-guest)</a>
 </div>
 <div style="text-align:center"><a href="index.html">tool</a></div>
-<img style="text-align:right" src="img.png" alt="Some Picture" height="10px" width="10px">
+<img src="img.png" alt="Some Picture" height="20px" width="20px" onclick="C();return false;">
 <center><h3>Presented by T.N.</h3></center>
 </body>
 </html>
