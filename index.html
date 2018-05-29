@@ -1,379 +1,354 @@
 <html>
 <head>
-<title>scratch.html</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
 <style type="text/css">
-.ln { color: #606366; font-weight: normal; font-style: normal; }
-.s0 { color: rgb(232,191,106); }
-.s1 { color: rgb(186,186,186); }
-.s2 { color: rgb(165,194,97); }
-.s3 { color: rgb(169,183,198); }
-.s4 { color: rgb(104,151,187); }
-.s5 { color: rgb(204,120,50); }
-.s6 { color: rgb(128,128,128); }
-.s7 { color: rgb(204,120,50); font-weight: bold; }
-.s8 { color: rgb(106,135,89); }
+    textarea{
+        width:100%;
+    }
+
+    /* 表示領域全体 */
+    div.tabbox {
+        margin: 0px; padding: 0px;
+    }
+
+    /* タブ部分 */
+    p.tabs { margin: 0px; padding: 0px; }
+    p.tabs a {
+        display: block; width: 5em; float: left;
+        margin: 0px 1px 0px 0px; padding: 3px;
+        text-align: center;
+        border-radius: 12px 12px 0px 0px; /* 角を丸くする */
+    }
+    p.tabs a.tab1 { background-color: blue; color: white; }
+    p.tabs a.tab2 { background-color: #aaaa00; color:white;}
+    p.tabs a.tab3 { background-color: red; color: white; }
+    p.tabs a:hover { color: yellow; }
+
+    /* タブ中身のボックス */
+    div.tab {  overflow: auto; clear: left; }
+    div#tab1 {
+        border: 2px solid blue; background-color: #ccffff;
+    }
+    div#tab2 {
+        border: 2px solid #aaaa00; background-color: #ffffcc;
+    }
+    div#tab3 {
+        border: 2px solid red; background-color: #ffcccc;
+    }
+    div.tab p { margin: 0.5em; }
 </style>
+<script type="text/javascript">
+    function ChangeTab(tabname) {
+        // 全部消す
+        document.getElementById('tab1').style.display = 'none';
+        document.getElementById('tab2').style.display = 'none';
+        document.getElementById('tab3').style.display = 'none';
+        // 指定箇所のみ表示
+        document.getElementById(tabname).style.display = 'block';
+    }
+
+    function Cae(){
+        var input=document.getElementById("caein").value;
+        var output=new String();
+        if(document.getElementById("caee").checked){
+            input=input.toUpperCase();
+            for(var i=0; i<input.length; i++){
+                var test=input.charCodeAt(i);
+                if(test>0x0040 && test<0x005B){
+                    test-=65;
+                    test+=document.getElementById("zure").value*1;
+                    test=test%26;
+                    test+=65;
+                    output+=String.fromCharCode(test);
+                }
+                else output+=String.fromCharCode(test);
+            }
+            document.getElementById("caeout").value=output;
+        }
+        else{
+            input=input.toLowerCase();
+            for(var i=0; i<input.length; i++){
+                var test=input.charCodeAt(i);
+                if(test>0x0060 && test<0x007B){
+                    test-=97;
+                    test+=26;
+                    test-=document.getElementById("zure").value*1;
+                    test=test%26;
+                    test+=97;
+                    output+=String.fromCharCode(test);
+                }
+                else output+=String.fromCharCode(test);
+            }
+            document.getElementById("caeout").value=output;
+        }
+    }
+
+    function shuffle(array) {
+        var n = array.length, t, i;
+
+        while (n) {
+            i = Math.floor(Math.random() * n--);
+            t = array[n];
+            array[n] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
+
+    function Sin(){
+        var input=document.getElementById("sinin").value;
+        var output=new String();
+        if(document.getElementById("sine").checked){
+            var key=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
+            key=shuffle(key);
+            var keyword=new String();
+            for(var i=0; i<26; i++){
+                keyword+=String.fromCharCode(key[i]+64);
+            }
+            document.getElementById("sinkey").value=keyword;
+            input=input.toUpperCase();
+            for(var i=0; i<input.length; i++){
+                var test=input.charCodeAt(i);
+                if(test>0x0040 && test<0x005B){
+                    test-=65;
+                    test=key[test];
+                    test+=64;
+                    output+=String.fromCharCode(test);
+                }
+                else output+=String.fromCharCode(test);
+            }
+            document.getElementById("sinout").value=output;
+        }
+        else{
+            input=input.toLowerCase();
+            var keykey=new Array(26);
+            var keyusr=document.getElementById("sinkey").value;
+            if(keyusr.length!=26){
+                output="鍵が無効です";
+            }
+            else{
+                keyusr=keyusr.toLowerCase();
+                for(i=0; i<26; i++){
+                    keykey[i]=keyusr.charCodeAt(i)-97;
+                }
+                for(var i=0; i<input.length; i++){
+                    var test=input.charCodeAt(i);
+                    if(test>0x0060 && test<0x007B){
+                        test-=97;
+                        for(var j=0; j<26; j++){
+                            if(test==keykey[j]){
+                                test=j;
+                                break;
+                            }
+                        }
+                        test+=97;
+                        output+=String.fromCharCode(test);
+                    }
+                    else output+=String.fromCharCode(test);
+                }
+            }
+            document.getElementById("sinout").value=output;
+        }
+    }
+
+    function Ms(){
+        var keyde=[
+            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,],
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,],
+            [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,],
+            [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,],
+            [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,],
+            [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,],
+            [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,],
+            [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,],
+            [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,],
+            [9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,],
+            [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,],
+            [11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,],
+            [12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,],
+            [13,14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,],
+            [14,15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,],
+            [15,16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,],
+            [16,17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,],
+            [17,18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,],
+            [18,19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,],
+            [19,20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,],
+            [20,21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,],
+            [21,22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,],
+            [22,23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,],
+            [23,24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,],
+            [24,25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,],
+            [25,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,],
+        ];
+        var input=document.getElementById("msin").value;
+        var output=new String();
+        var key=document.getElementById("mskey").value;
+        var keyuse=0;
+        key=key.toUpperCase();
+        if(document.getElementById("mse").checked){
+            if(key.length==0)output="鍵を設定してください";
+            else{
+                input=input.toUpperCase();
+                for(var i=0; i<input.length; i++){
+                    var test=input.charCodeAt(i);
+                    if(test>0x0040 && test<0x005B){
+                        test-=65;
+                        test=keyde[key.charCodeAt(keyuse)-65][test];
+                        test+=65;
+                        output+=String.fromCharCode(test);
+                        keyuse++;
+                        keyuse%=key.length;
+                    }
+                    else output+=String.fromCharCode(test);
+                }
+            }
+            document.getElementById("msout").value=output;
+        }
+        else{
+            input=input.toLowerCase();
+            if(key.length==0)output="鍵を設定してください";
+            else{
+                for(var i=0; i<input.length; i++){
+                    var test=input.charCodeAt(i);
+                    if(test>0x0060 && test<0x007B){
+                        test-=97;
+                        for(var j=0; j<26; j++){
+                            if(keyde[key.charCodeAt(keyuse)-65][j]==test){
+                                test=j;
+                                break;
+                            }
+                        }
+                        test+=97;
+                        output+=String.fromCharCode(test);
+                        keyuse++;
+                        keyuse%=key.length;
+                    }
+                    else output+=String.fromCharCode(test);
+                }
+            }
+            document.getElementById("msout").value=output;
+        }
+    }
+
+</script>
 </head>
-<BODY BGCOLOR="#2b2b2b">
-<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
-<TR><TD><CENTER>
-<FONT FACE="Arial, Helvetica" COLOR="#000000">
-scratch.html</FONT>
-</center></TD></TR></TABLE>
-<pre>
-<span class="s0">&lt;meta </span><span class="s1">charset=</span><span class="s2">&quot;UTF-8&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;style </span><span class="s1">type=</span><span class="s2">&quot;text/css&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-    </span><span class="s0">textarea</span><span class="s3">{ 
-        </span><span class="s1">width</span><span class="s3">:</span><span class="s4">100</span><span class="s3">%</span><span class="s5">;</span><span class="s3"> 
-    } 
- 
-    </span><span class="s6">/* 表示領域全体 */</span><span class="s3"> 
-    </span><span class="s0">div</span><span class="s3">.</span><span class="s0">tabbox </span><span class="s3">{ 
-        </span><span class="s1">margin</span><span class="s3">: </span><span class="s4">0</span><span class="s2">px</span><span class="s5">; </span><span class="s1">padding</span><span class="s3">: </span><span class="s4">0</span><span class="s2">px</span><span class="s5">;</span><span class="s3"> 
-    } 
- 
-    </span><span class="s6">/* タブ部分 */</span><span class="s3"> 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs </span><span class="s3">{ </span><span class="s1">margin</span><span class="s3">: </span><span class="s4">0</span><span class="s2">px</span><span class="s5">; </span><span class="s1">padding</span><span class="s3">: </span><span class="s4">0</span><span class="s2">px</span><span class="s5">; </span><span class="s3">} 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs a </span><span class="s3">{ 
-        </span><span class="s1">display</span><span class="s3">: </span><span class="s2">block</span><span class="s5">; </span><span class="s1">width</span><span class="s3">: </span><span class="s4">5</span><span class="s2">em</span><span class="s5">; </span><span class="s1">float</span><span class="s3">: </span><span class="s2">left</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s1">margin</span><span class="s3">: </span><span class="s4">0</span><span class="s2">px </span><span class="s4">1</span><span class="s2">px </span><span class="s4">0</span><span class="s2">px </span><span class="s4">0</span><span class="s2">px</span><span class="s5">; </span><span class="s1">padding</span><span class="s3">: </span><span class="s4">3</span><span class="s2">px</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s1">text-align</span><span class="s3">: </span><span class="s2">center</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s1">border-radius</span><span class="s3">: </span><span class="s4">12</span><span class="s2">px </span><span class="s4">12</span><span class="s2">px </span><span class="s4">0</span><span class="s2">px </span><span class="s4">0</span><span class="s2">px</span><span class="s5">; </span><span class="s6">/* 角を丸くする */</span><span class="s3"> 
-    } 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs a</span><span class="s3">.</span><span class="s0">tab1 </span><span class="s3">{ </span><span class="s1">background-color</span><span class="s3">: </span><span class="s2">blue</span><span class="s5">; </span><span class="s1">color</span><span class="s3">: </span><span class="s2">white</span><span class="s5">; </span><span class="s3">} 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs a</span><span class="s3">.</span><span class="s0">tab2 </span><span class="s3">{ </span><span class="s1">background-color</span><span class="s3">: </span><span class="s4">#aaaa00</span><span class="s5">; </span><span class="s1">color</span><span class="s3">:</span><span class="s2">white</span><span class="s5">;</span><span class="s3">} 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs a</span><span class="s3">.</span><span class="s0">tab3 </span><span class="s3">{ </span><span class="s1">background-color</span><span class="s3">: </span><span class="s2">red</span><span class="s5">; </span><span class="s1">color</span><span class="s3">: </span><span class="s2">white</span><span class="s5">; </span><span class="s3">} 
-    </span><span class="s0">p</span><span class="s3">.</span><span class="s0">tabs a</span><span class="s3">:</span><span class="s0">hover </span><span class="s3">{ </span><span class="s1">color</span><span class="s3">: </span><span class="s2">yellow</span><span class="s5">; </span><span class="s3">} 
- 
-    </span><span class="s6">/* タブ中身のボックス */</span><span class="s3"> 
-    </span><span class="s0">div</span><span class="s3">.</span><span class="s0">tab </span><span class="s3">{  </span><span class="s1">overflow</span><span class="s3">: </span><span class="s2">auto</span><span class="s5">; </span><span class="s1">clear</span><span class="s3">: </span><span class="s2">left</span><span class="s5">; </span><span class="s3">} 
-    </span><span class="s0">div#tab1 </span><span class="s3">{ 
-        </span><span class="s1">border</span><span class="s3">: </span><span class="s4">2</span><span class="s2">px solid blue</span><span class="s5">; </span><span class="s1">background-color</span><span class="s3">: </span><span class="s4">#ccffff</span><span class="s5">;</span><span class="s3"> 
-    } 
-    </span><span class="s0">div#tab2 </span><span class="s3">{ 
-        </span><span class="s1">border</span><span class="s3">: </span><span class="s4">2</span><span class="s2">px solid </span><span class="s4">#aaaa00</span><span class="s5">; </span><span class="s1">background-color</span><span class="s3">: </span><span class="s4">#ffffcc</span><span class="s5">;</span><span class="s3"> 
-    } 
-    </span><span class="s0">div#tab3 </span><span class="s3">{ 
-        </span><span class="s1">border</span><span class="s3">: </span><span class="s4">2</span><span class="s2">px solid red</span><span class="s5">; </span><span class="s1">background-color</span><span class="s3">: </span><span class="s4">#ffcccc</span><span class="s5">;</span><span class="s3"> 
-    } 
-    </span><span class="s0">div</span><span class="s3">.</span><span class="s0">tab p </span><span class="s3">{ </span><span class="s1">margin</span><span class="s3">: </span><span class="s4">0.5</span><span class="s2">em</span><span class="s5">; </span><span class="s3">} 
-</span><span class="s0">&lt;/style&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;script </span><span class="s1">type=</span><span class="s2">&quot;text/javascript&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-    </span><span class="s7">function </span><span class="s3">ChangeTab(tabname) { 
-        </span><span class="s6">// 全部消す</span><span class="s3"> 
-        document.getElementById(</span><span class="s8">'tab1'</span><span class="s3">).style.display = </span><span class="s8">'none'</span><span class="s5">;</span><span class="s3"> 
-        document.getElementById(</span><span class="s8">'tab2'</span><span class="s3">).style.display = </span><span class="s8">'none'</span><span class="s5">;</span><span class="s3"> 
-        document.getElementById(</span><span class="s8">'tab3'</span><span class="s3">).style.display = </span><span class="s8">'none'</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s6">// 指定箇所のみ表示</span><span class="s3"> 
-        document.getElementById(tabname).style.display = </span><span class="s8">'block'</span><span class="s5">;</span><span class="s3"> 
-    } 
- 
-    </span><span class="s7">function </span><span class="s3">Cae(){ 
-        </span><span class="s7">var </span><span class="s3">input=document.getElementById(</span><span class="s8">&quot;caein&quot;</span><span class="s3">).value</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">output=</span><span class="s7">new </span><span class="s3">String()</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">if</span><span class="s3">(document.getElementById(</span><span class="s8">&quot;caee&quot;</span><span class="s3">).checked){ 
-            input=input.toUpperCase()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0040 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x005B</span><span class="s3">){ 
-                    test-=</span><span class="s4">65</span><span class="s5">;</span><span class="s3"> 
-                    test+=document.getElementById(</span><span class="s8">&quot;zure&quot;</span><span class="s3">).value*</span><span class="s4">1</span><span class="s5">;</span><span class="s3"> 
-                    test=test%</span><span class="s4">26</span><span class="s5">;</span><span class="s3"> 
-                    test+=</span><span class="s4">65</span><span class="s5">;</span><span class="s3"> 
-                    output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-                </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-            } 
-            document.getElementById(</span><span class="s8">&quot;caeout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-        </span><span class="s7">else</span><span class="s3">{ 
-            input=input.toLowerCase()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0060 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x007B</span><span class="s3">){ 
-                    test-=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                    test+=</span><span class="s4">26</span><span class="s5">;</span><span class="s3"> 
-                    test-=document.getElementById(</span><span class="s8">&quot;zure&quot;</span><span class="s3">).value*</span><span class="s4">1</span><span class="s5">;</span><span class="s3"> 
-                    test=test%</span><span class="s4">26</span><span class="s5">;</span><span class="s3"> 
-                    test+=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                    output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-                </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-            } 
-            document.getElementById(</span><span class="s8">&quot;caeout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-    } 
- 
-    </span><span class="s7">function </span><span class="s3">shuffle(array) { 
-        </span><span class="s7">var </span><span class="s3">n = array.length</span><span class="s5">, </span><span class="s3">t</span><span class="s5">, </span><span class="s3">i</span><span class="s5">;</span><span class="s3"> 
- 
-        </span><span class="s7">while </span><span class="s3">(n) { 
-            i = Math.floor(Math.random() * n--)</span><span class="s5">;</span><span class="s3"> 
-            t = array[n]</span><span class="s5">;</span><span class="s3"> 
-            array[n] = array[i]</span><span class="s5">;</span><span class="s3"> 
-            array[i] = t</span><span class="s5">;</span><span class="s3"> 
-        } 
- 
-        </span><span class="s7">return </span><span class="s3">array</span><span class="s5">;</span><span class="s3"> 
-    } 
- 
-    </span><span class="s7">function </span><span class="s3">Sin(){ 
-        </span><span class="s7">var </span><span class="s3">input=document.getElementById(</span><span class="s8">&quot;sinin&quot;</span><span class="s3">).value</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">output=</span><span class="s7">new </span><span class="s3">String()</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">if</span><span class="s3">(document.getElementById(</span><span class="s8">&quot;sine&quot;</span><span class="s3">).checked){ 
-            </span><span class="s7">var </span><span class="s3">key=[</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">26</span><span class="s3">]</span><span class="s5">;</span><span class="s3"> 
-            key=shuffle(key)</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">var </span><span class="s3">keyword=</span><span class="s7">new </span><span class="s3">String()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;</span><span class="s4">26</span><span class="s5">; </span><span class="s3">i++){ 
-                keyword+=String.fromCharCode(key[i]+</span><span class="s4">64</span><span class="s3">)</span><span class="s5">;</span><span class="s3"> 
-            } 
-            document.getElementById(</span><span class="s8">&quot;sinkey&quot;</span><span class="s3">).value=keyword</span><span class="s5">;</span><span class="s3"> 
-            input=input.toUpperCase()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0040 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x005B</span><span class="s3">){ 
-                    test-=</span><span class="s4">65</span><span class="s5">;</span><span class="s3"> 
-                    test=key[test]</span><span class="s5">;</span><span class="s3"> 
-                    test+=</span><span class="s4">64</span><span class="s5">;</span><span class="s3"> 
-                    output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-                </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-            } 
-            document.getElementById(</span><span class="s8">&quot;sinout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-        </span><span class="s7">else</span><span class="s3">{ 
-            input=input.toLowerCase()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">var </span><span class="s3">keykey=</span><span class="s7">new </span><span class="s3">Array(</span><span class="s4">26</span><span class="s3">)</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">var </span><span class="s3">keyusr=document.getElementById(</span><span class="s8">&quot;sinkey&quot;</span><span class="s3">).value</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">if</span><span class="s3">(keyusr.length!=</span><span class="s4">26</span><span class="s3">){ 
-                output=</span><span class="s8">&quot;鍵が無効です&quot;</span><span class="s5">;</span><span class="s3"> 
-            } 
-            </span><span class="s7">else</span><span class="s3">{ 
-                keyusr=keyusr.toLowerCase()</span><span class="s5">;</span><span class="s3"> 
-                </span><span class="s7">for</span><span class="s3">(i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;</span><span class="s4">26</span><span class="s5">; </span><span class="s3">i++){ 
-                    keykey[i]=keyusr.charCodeAt(i)-</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                } 
-                </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                    </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                    </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0060 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x007B</span><span class="s3">){ 
-                        test-=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                        </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">j=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">j&lt;</span><span class="s4">26</span><span class="s5">; </span><span class="s3">j++){ 
-                            </span><span class="s7">if</span><span class="s3">(test==keykey[j]){ 
-                                test=j</span><span class="s5">;</span><span class="s3"> 
-                                </span><span class="s7">break</span><span class="s5">;</span><span class="s3"> 
-                            } 
-                        } 
-                        test+=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                        output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                    } 
-                    </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-            } 
-            document.getElementById(</span><span class="s8">&quot;sinout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-    } 
- 
-    </span><span class="s7">function </span><span class="s3">Ms(){ 
-        </span><span class="s7">var </span><span class="s3">keyde=[ 
-            [</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">24</span><span class="s5">,</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-            [</span><span class="s4">25</span><span class="s5">,</span><span class="s4">0</span><span class="s5">,</span><span class="s4">1</span><span class="s5">,</span><span class="s4">2</span><span class="s5">,</span><span class="s4">3</span><span class="s5">,</span><span class="s4">4</span><span class="s5">,</span><span class="s4">5</span><span class="s5">,</span><span class="s4">6</span><span class="s5">,</span><span class="s4">7</span><span class="s5">,</span><span class="s4">8</span><span class="s5">,</span><span class="s4">9</span><span class="s5">,</span><span class="s4">10</span><span class="s5">,</span><span class="s4">11</span><span class="s5">,</span><span class="s4">12</span><span class="s5">,</span><span class="s4">13</span><span class="s5">,</span><span class="s4">14</span><span class="s5">,</span><span class="s4">15</span><span class="s5">,</span><span class="s4">16</span><span class="s5">,</span><span class="s4">17</span><span class="s5">,</span><span class="s4">18</span><span class="s5">,</span><span class="s4">19</span><span class="s5">,</span><span class="s4">20</span><span class="s5">,</span><span class="s4">21</span><span class="s5">,</span><span class="s4">22</span><span class="s5">,</span><span class="s4">23</span><span class="s5">,</span><span class="s4">24</span><span class="s5">,</span><span class="s3">]</span><span class="s5">,</span><span class="s3"> 
-        ]</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">input=document.getElementById(</span><span class="s8">&quot;msin&quot;</span><span class="s3">).value</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">output=</span><span class="s7">new </span><span class="s3">String()</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">key=document.getElementById(</span><span class="s8">&quot;mskey&quot;</span><span class="s3">).value</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">var </span><span class="s3">keyuse=</span><span class="s4">0</span><span class="s5">;</span><span class="s3"> 
-        key=key.toUpperCase()</span><span class="s5">;</span><span class="s3"> 
-        </span><span class="s7">if</span><span class="s3">(document.getElementById(</span><span class="s8">&quot;mse&quot;</span><span class="s3">).checked){ 
-            </span><span class="s7">if</span><span class="s3">(key.length==</span><span class="s4">0</span><span class="s3">)output=</span><span class="s8">&quot;鍵を設定してください&quot;</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">else</span><span class="s3">{ 
-                input=input.toUpperCase()</span><span class="s5">;</span><span class="s3"> 
-                </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                    </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                    </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0040 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x005B</span><span class="s3">){ 
-                        test-=</span><span class="s4">65</span><span class="s5">;</span><span class="s3"> 
-                        test=keyde[key.charCodeAt(keyuse)-</span><span class="s4">65</span><span class="s3">][test]</span><span class="s5">;</span><span class="s3"> 
-                        test+=</span><span class="s4">65</span><span class="s5">;</span><span class="s3"> 
-                        output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                        keyuse++</span><span class="s5">;</span><span class="s3"> 
-                        keyuse%=key.length</span><span class="s5">;</span><span class="s3"> 
-                    } 
-                    </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-            } 
-            document.getElementById(</span><span class="s8">&quot;msout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-        </span><span class="s7">else</span><span class="s3">{ 
-            input=input.toLowerCase()</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">if</span><span class="s3">(key.length==</span><span class="s4">0</span><span class="s3">)output=</span><span class="s8">&quot;鍵を設定してください&quot;</span><span class="s5">;</span><span class="s3"> 
-            </span><span class="s7">else</span><span class="s3">{ 
-                </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">i=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">i&lt;input.length</span><span class="s5">; </span><span class="s3">i++){ 
-                    </span><span class="s7">var </span><span class="s3">test=input.charCodeAt(i)</span><span class="s5">;</span><span class="s3"> 
-                    </span><span class="s7">if</span><span class="s3">(test&gt;</span><span class="s4">0x0060 </span><span class="s3">&amp;&amp; test&lt;</span><span class="s4">0x007B</span><span class="s3">){ 
-                        test-=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                        </span><span class="s7">for</span><span class="s3">(</span><span class="s7">var </span><span class="s3">j=</span><span class="s4">0</span><span class="s5">; </span><span class="s3">j&lt;</span><span class="s4">26</span><span class="s5">; </span><span class="s3">j++){ 
-                            </span><span class="s7">if</span><span class="s3">(keyde[key.charCodeAt(keyuse)-</span><span class="s4">65</span><span class="s3">][j]==test){ 
-                                test=j</span><span class="s5">;</span><span class="s3"> 
-                                </span><span class="s7">break</span><span class="s5">;</span><span class="s3"> 
-                            } 
-                        } 
-                        test+=</span><span class="s4">97</span><span class="s5">;</span><span class="s3"> 
-                        output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                        keyuse++</span><span class="s5">;</span><span class="s3"> 
-                        keyuse%=key.length</span><span class="s5">;</span><span class="s3"> 
-                    } 
-                    </span><span class="s7">else </span><span class="s3">output+=String.fromCharCode(test)</span><span class="s5">;</span><span class="s3"> 
-                } 
-            } 
-            document.getElementById(</span><span class="s8">&quot;msout&quot;</span><span class="s3">).value=output</span><span class="s5">;</span><span class="s3"> 
-        } 
-    } 
- 
-</span><span class="s0">&lt;/script&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;/head&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;body&gt;</span><span class="s3"> 
-</span><span class="s6">&lt;!--[if IE ]&gt; 
-&lt;div id=&quot;sitemix_user_contents&quot;&gt; 
-&lt;![endif]--&gt;</span><span class="s3"> 
- 
-</span><span class="s0">&lt;div </span><span class="s1">class=</span><span class="s2">&quot;tabbox&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;p </span><span class="s1">class=</span><span class="s2">&quot;tabs&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;a </span><span class="s1">href=</span><span class="s2">&quot;#tab1&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab1&quot; </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">ChangeTab(</span><span class="s8">'tab1'</span><span class="s3">)</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">シーザー</span><span class="s0">&lt;/a&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;a </span><span class="s1">href=</span><span class="s2">&quot;#tab2&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab2&quot; </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">ChangeTab(</span><span class="s8">'tab2'</span><span class="s3">)</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">単表式</span><span class="s0">&lt;/a&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;a </span><span class="s1">href=</span><span class="s2">&quot;#tab3&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab3&quot; </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">ChangeTab(</span><span class="s8">'tab3'</span><span class="s3">)</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">多表式</span><span class="s0">&lt;/a&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;/p&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;div </span><span class="s1">id=</span><span class="s2">&quot;tab1&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">入力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;form </span><span class="s1">action=</span><span class="s2">&quot;&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;caein&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;&lt;br&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;b&gt;</span><span class="s3">文字数</span><span class="s0">&lt;/b&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;select </span><span class="s1">id=</span><span class="s2">&quot;zure&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">1</span><span class="s0">&gt;</span><span class="s3">1</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">2</span><span class="s0">&gt;</span><span class="s3">2</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">3</span><span class="s0">&gt;</span><span class="s3">3</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">4</span><span class="s0">&gt;</span><span class="s3">4</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">5</span><span class="s0">&gt;</span><span class="s3">5</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">6</span><span class="s0">&gt;</span><span class="s3">6</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">7</span><span class="s0">&gt;</span><span class="s3">7</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">8</span><span class="s0">&gt;</span><span class="s3">8</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">9</span><span class="s0">&gt;</span><span class="s3">9</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">10</span><span class="s0">&gt;</span><span class="s3">10</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">11</span><span class="s0">&gt;</span><span class="s3">11</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">12</span><span class="s0">&gt;</span><span class="s3">12</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">13</span><span class="s0">&gt;</span><span class="s3">13</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">14</span><span class="s0">&gt;</span><span class="s3">14</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">15</span><span class="s0">&gt;</span><span class="s3">15</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">16</span><span class="s0">&gt;</span><span class="s3">16</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">17</span><span class="s0">&gt;</span><span class="s3">17</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">18</span><span class="s0">&gt;</span><span class="s3">18</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">19</span><span class="s0">&gt;</span><span class="s3">19</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">20</span><span class="s0">&gt;</span><span class="s3">20</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">21</span><span class="s0">&gt;</span><span class="s3">21</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">22</span><span class="s0">&gt;</span><span class="s3">22</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">23</span><span class="s0">&gt;</span><span class="s3">23</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">24</span><span class="s0">&gt;</span><span class="s3">24</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">25</span><span class="s0">&gt;</span><span class="s3">25</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                    </span><span class="s0">&lt;option </span><span class="s1">value=</span><span class="s2">26</span><span class="s0">&gt;</span><span class="s3">26</span><span class="s0">&lt;/option&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;/select&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;caesel&quot; </span><span class="s1">id=</span><span class="s2">&quot;caee&quot; </span><span class="s1">checked=</span><span class="s2">&quot;true&quot;</span><span class="s0">&gt;</span><span class="s3">暗号化 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;caesel&quot;</span><span class="s0">&gt;</span><span class="s3">復号化 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;button </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">Cae()</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">送信</span><span class="s0">&lt;/button&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/form&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;hr&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">出力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;caeout&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;/div&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;div </span><span class="s1">id=</span><span class="s2">&quot;tab2&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">入力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;form </span><span class="s1">action=</span><span class="s2">&quot;&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;sinin&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;&lt;br&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;b&gt;</span><span class="s3">鍵</span><span class="s0">&lt;/b&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;text&quot; </span><span class="s1">id=</span><span class="s2">&quot;sinkey&quot; </span><span class="s1">size=</span><span class="s2">&quot;40&quot; </span><span class="s1">maxlength=</span><span class="s2">&quot;26&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;sinsel&quot; </span><span class="s1">id=</span><span class="s2">&quot;sine&quot; </span><span class="s1">checked=</span><span class="s2">&quot;true&quot;</span><span class="s0">&gt;</span><span class="s3">暗号化 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;sinsel&quot;</span><span class="s0">&gt;</span><span class="s3">復号化 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;button </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">Sin()</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">送信</span><span class="s0">&lt;/button&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/form&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;hr&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">出力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;sinout&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;/div&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;div </span><span class="s1">id=</span><span class="s2">&quot;tab3&quot; </span><span class="s1">class=</span><span class="s2">&quot;tab&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">入力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;form </span><span class="s1">action=</span><span class="s2">&quot;&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;msin&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;&lt;br&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;b&gt;</span><span class="s3">鍵</span><span class="s0">&lt;/b&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;mskey&quot; </span><span class="s1">rows=</span><span class="s2">&quot;1&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;mssel&quot; </span><span class="s1">id=</span><span class="s2">&quot;mse&quot; </span><span class="s1">checked=</span><span class="s2">&quot;true&quot;</span><span class="s0">&gt;</span><span class="s3">暗号化 
-                </span><span class="s0">&lt;input </span><span class="s1">type=</span><span class="s2">&quot;radio&quot; </span><span class="s1">name=</span><span class="s2">&quot;mssel&quot;</span><span class="s0">&gt;</span><span class="s3">復号化 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-                </span><span class="s0">&lt;button </span><span class="s1">onclick=</span><span class="s2">&quot;</span><span class="s3">Ms()</span><span class="s5">; </span><span class="s7">return false</span><span class="s5">;</span><span class="s2">&quot;</span><span class="s0">&gt;</span><span class="s3">送信</span><span class="s0">&lt;/button&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/form&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/p&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;hr&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;h1&gt;</span><span class="s3">出力</span><span class="s0">&lt;/h1&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;center&gt;</span><span class="s3"> 
-            </span><span class="s0">&lt;textarea </span><span class="s1">id=</span><span class="s2">&quot;msout&quot; </span><span class="s1">rows=</span><span class="s2">&quot;10&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span><span class="s3"> 
-        </span><span class="s0">&lt;/center&gt;</span><span class="s3"> 
-    </span><span class="s0">&lt;/div&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;/div&gt;</span><span class="s3"> 
- 
-</span><span class="s0">&lt;script </span><span class="s1">type=</span><span class="s2">&quot;text/javascrispt&quot;</span><span class="s0">&gt;</span><span class="s3"> 
-    // デフォルトのタブを選択 
-    ChangeTab('tab1'); 
-</span><span class="s0">&lt;/script&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;center&gt;&lt;h3&gt;</span><span class="s3">Presented by mの本音</span><span class="s0">&lt;/h3&gt;&lt;/center&gt;</span><span class="s3"> 
- 
-</span><span class="s0">&lt;/body&gt;</span><span class="s3"> 
-</span><span class="s0">&lt;/html&gt;</span></pre>
+<body>
+<!--[if IE ]>
+<div id="sitemix_user_contents">
+<![endif]-->
+
+<div class="tabbox">
+    <p class="tabs">
+        <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">シーザー</a>
+        <a href="#tab2" class="tab2" onclick="ChangeTab('tab2'); return false;">単表式</a>
+        <a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false;">多表式</a>
+    </p>
+    <div id="tab1" class="tab">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="caein" rows="10"></textarea>
+            </center><br>
+            <center>
+                <b>文字数</b>
+                <select id="zure">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                    <option value=11>11</option>
+                    <option value=12>12</option>
+                    <option value=13>13</option>
+                    <option value=14>14</option>
+                    <option value=15>15</option>
+                    <option value=16>16</option>
+                    <option value=17>17</option>
+                    <option value=18>18</option>
+                    <option value=19>19</option>
+                    <option value=20>20</option>
+                    <option value=21>21</option>
+                    <option value=22>22</option>
+                    <option value=23>23</option>
+                    <option value=24>24</option>
+                    <option value=25>25</option>
+                    <option value=26>26</option>
+                </select>
+                <input type="radio" name="caesel" id="caee" checked="true">暗号化
+                <input type="radio" name="caesel">復号化
+            </center>
+            <center>
+                <button onclick="Cae(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
+        <center>
+            <textarea id="caeout" rows="10"></textarea>
+        </center>
+    </div>
+    <div id="tab2" class="tab">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="sinin" rows="10"></textarea>
+            </center><br>
+            <center>
+                <b>鍵</b>
+                <input type="text" id="sinkey" size="40" maxlength="26">
+                <input type="radio" name="sinsel" id="sine" checked="true">暗号化
+                <input type="radio" name="sinsel">復号化
+            </center>
+            <center>
+                <button onclick="Sin(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
+        <center>
+            <textarea id="sinout" rows="10"></textarea>
+        </center>
+    </div>
+    <div id="tab3" class="tab">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="msin" rows="10"></textarea>
+            </center><br>
+            <center>
+                <b>鍵</b>
+                <textarea id="mskey" rows="1"></textarea>
+                <input type="radio" name="mssel" id="mse" checked="true">暗号化
+                <input type="radio" name="mssel">復号化
+            </center>
+            <center>
+                <button onclick="Ms(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
+        <center>
+            <textarea id="msout" rows="10"></textarea>
+        </center>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // デフォルトのタブを選択
+    ChangeTab('tab1');
+</script>
+<center><h3>Presented by mの本音</h3></center>
 </body>
 </html>
