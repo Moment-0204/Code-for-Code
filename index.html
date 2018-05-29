@@ -218,8 +218,8 @@
                         output+=String.fromCharCode(9);
                     }
                     if((test>0x0040 && test<0x005B)|| test==44 ||test==46){
-                        if(test==44)test=27;
-                        else if(test==46)test=28;
+                        if(test==44)test=26;
+                        else if(test==46)test=27;
                         else test-=65;
                         test=keyde[key.charCodeAt(keyuse)-65][freq[test]+Math.floor(Math.random()*(freq[test+1]-freq[test]))];
                         output+=test+' ';
