@@ -26,8 +26,20 @@
     var co=0;
     function C() {
         co++;
-        if(co===3)alert("N");
+        if(co===3){
+            document.getElementById("ne").style.display='block';
+        }
+        else{
+            document.getElementById("ne").style.display='none';
+        }
     }
+
+    function l() {
+        if(document.getElementById("ru").value=="neru"){
+            document.getElementById("ka").style.display='block';
+        }
+    }
+
 </script>
 </head>
 <body oncontextmenu="alert('笑笑');return false">
@@ -36,8 +48,22 @@
 <h2>Links</h2>
 <a href="http://clair.si.umich.edu/naclobase/get.cgi?pid=196&version=1">言語学の過去問集(guest-guest)</a>
 </div>
+<div id="ne">
+    <center>
+        name<input type="text" size="10"><br>
+        pass<input id='ru' type="password" size="10"><br>
+        <button onclick="l();return false;">送信</button>
+    </center>
+</div>
+<div id="ka" style="text-align: center">
+    <a href="http://twitter.com/keyakizaka46/status/1001014834551402496" target="_blank"></a>
+</div>
 <div style="text-align:center"><a href="index.html">tool</a></div>
 <img src="img.png" alt="Some Picture" height="20px" width="20px" onclick="C();return false;">
 <center><h3>Presented by T.N.</h3></center>
+<script>
+    document.getElementById("ne").style.display='none';
+    document.getElementById("ka").style.display='none';
+</script>
 </body>
 </html>
