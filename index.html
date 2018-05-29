@@ -9,9 +9,15 @@
         text-align: center;
     }
 
+    body{
+        background-color:#5fb955 ;
+    }
+
     textarea{
         width:100%;
     }
+
+
 
     /* 表示領域全体 */
     div.tabbox {
@@ -29,6 +35,7 @@
     p.tabs a.tab1 { background-color: blue; color: white; }
     p.tabs a.tab2 { background-color: #aaaa00; color:white;}
     p.tabs a.tab3 { background-color: red; color: white; }
+    p.tabs a.tab4 { background-color: blueviolet; color: white;}
     p.tabs a:hover { color: yellow; }
 
     /* タブ中身のボックス */
@@ -42,6 +49,9 @@
     div#tab3 {
         border: 2px solid red; background-color: #ffcccc;
     }
+    div#tab4 {
+        border: 2px solid blueviolet; background-color: #a849f0;
+    }
     div.tab p { margin: 0.5em; }
 </style>
 <script type="text/javascript">
@@ -50,6 +60,7 @@
         document.getElementById('tab1').style.display = 'none';
         document.getElementById('tab2').style.display = 'none';
         document.getElementById('tab3').style.display = 'none';
+        document.getElementById('tab4').style.display = 'none';
         // 指定箇所のみ表示
         document.getElementById(tabname).style.display = 'block';
     }
@@ -247,6 +258,7 @@
         <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">シーザー</a>
         <a href="#tab2" class="tab2" onclick="ChangeTab('tab2'); return false;">単表式</a>
         <a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false;">多表式</a>
+        <a href="#tab4" class="tab4" onclick="ChangeTab('tab4'); return false;">ＨＭＴ</a>
     </p>
     <div id="tab1" class="tab">
         <p>
@@ -347,12 +359,37 @@
             <textarea id="msout" rows="10"></textarea>
         </center>
     </div>
+    <div id="tab4" class="tab">
+    <p>
+    <h1>入力</h1>
+    <form action="">
+        <center>
+            <textarea id="hmin" rows="10"></textarea>
+        </center><br>
+        <center>
+            <b>鍵</b>
+            <textarea id="hmkey" rows="1"></textarea>
+            <input type="radio" name="hmsel" id="hme" checked="true">暗号化
+            <input type="radio" name="hmsel">復号化
+        </center>
+        <center>
+            <button onclick="Ms(); return false;">送信</button>
+        </center>
+    </form>
+    </p>
+    <hr>
+    <h1>出力</h1>
+    <center>
+        <textarea id="hmout" rows="10"></textarea>
+    </center>
+</div>
 </div>
 
+<p style="text-align:right">#HMT->Homophonic Multi Table by T.N.</p>
 <script type="text/javascript">
     // デフォルトのタブを選択
     ChangeTab('tab1');
 </script>
-<center><h3>Presented by mの本音</h3></center>
+<center><h3>Presented by T.N.</h3></center>
 </body>
 </html>
