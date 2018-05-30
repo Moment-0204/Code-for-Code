@@ -201,6 +201,14 @@
         for(var i=0; i<26; i++){
             keyde[i]=shuffle(keyde[i]);
         }
+        var keyo=new String();
+        for(var i=0;i<26;i++){
+            for(var j=0;j<101;j++){
+                keyo+=keyde[i][j]+" ";
+            }
+            keyo+="\n";
+        }
+        document.getElementById("hmkeyo").value=keyo;
         var input=document.getElementById("hmin").value;
         var output=new String();
         var key=document.getElementById("hmkey").value;
@@ -421,29 +429,36 @@
         </center>
     </div>
     <div id="tab4" class="tab">
-    <p>
-    <h1>入力</h1>
-    <form action="">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="hmin" rows="10"></textarea>
+            </center>
+            <br>
+            <center>
+                <b>鍵</b>
+                <textarea id="hmkey" rows="1"></textarea>
+                <input type="radio" name="hmsel" id="hme" checked="true">暗号化
+                <input type="radio" name="hmsel" disabled="disabled">復号化
+            </center>
+            <center>
+                <button onclick="HMT(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
         <center>
-            <textarea id="hmin" rows="10"></textarea>
-        </center><br>
-        <center>
-            <b>鍵</b>
-            <textarea id="hmkey" rows="1"></textarea>
-            <input type="radio" name="hmsel" id="hme" checked="true">暗号化
-            <input type="radio" name="hmsel" disabled="disabled">復号化
+            <textarea id="hmout" rows="10"></textarea>
         </center>
-        <center>
-            <button onclick="HMT(); return false;">送信</button>
-        </center>
-    </form>
-    </p>
-    <hr>
-    <h1>出力</h1>
-    <center>
-        <textarea id="hmout" rows="10"></textarea>
-    </center>
-</div>
+        <p>
+            <h1>表</h1>
+            <center>
+                <textarea id="hmkeyo" rows="26"></textarea>
+            </center>
+        </p>
+    </div>
 </div>
 
 <p style="text-align:right">#HMT->Homophonic Multi Table by T.N.</p>
