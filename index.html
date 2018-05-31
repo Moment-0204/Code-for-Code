@@ -201,10 +201,14 @@
         for(var i=0; i<26; i++){
             keyde[i]=shuffle(keyde[i]);
         }
+        var chs=document.getElementById("hmch").value;
+        chs=chs*1;
+        if(chs===0)chs=10000;
         var keyo=new String();
         for(var i=0;i<26;i++){
             for(var j=0;j<101;j++){
-                keyo+=keyde[i][j]+" ";
+                if(document.getElementById("hmc").checked) keyo+=keyde[i][j]+" ";
+                else keyo+=String.fromCharCode(keyde[i][j]+chs);
             }
             keyo+="\n";
         }
@@ -221,18 +225,27 @@
                 for(var i=0; i<input.length; i++){
                     var test=input.charCodeAt(i);
                     if(test==0x00A0 || test==0x0020){
-                        output+=String.fromCharCode(9);
+                        output+=String.fromCharCode(32);
+                        output+=String.fromCharCode(32);
                     }
                     if((test>0x0040 && test<0x005B)|| test==44 ||test==46){
                         if(test==44)test=26;
                         else if(test==46)test=27;
                         else test-=65;
                         test=keyde[key.charCodeAt(keyuse)-65][freq[test]+Math.floor(Math.random()*(freq[test+1]-freq[test]))];
-                        output+=test+' ';
+                        if(document.getElementById("hmc").checked){
+                            output+=test+' ';
+                        }
+                        else{
+                            output+=String.fromCharCode(test+chs);
+                        }
                         keyuse++;
                         keyuse%=key.length;
                     }
-                    else output+=String.fromCharCode(test);
+                    else{
+                        output+=String.fromCharCode(test);
+                        //if(document.getElementById("hmc").checked)output+=' ';
+                    }
                 }
             }
             document.getElementById("hmout").value=output;
@@ -441,6 +454,14 @@
                 <textarea id="hmkey" rows="1"></textarea>
                 <input type="radio" name="hmsel" id="hme" checked="true">暗号化
                 <input type="radio" name="hmsel" disabled="disabled">復号化
+            </center>
+            <center>
+                <input type="radio" name="hmcs" id="hmc" checked="true">number
+                <input type="radio" name="hmcs" >strange char
+                <b>文字起点</b>
+                <input id="hmch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
             </center>
             <center>
                 <button onclick="HMT(); return false;">送信</button>
