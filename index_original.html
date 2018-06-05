@@ -114,6 +114,9 @@
 
     function Sin(){
         var input=document.getElementById("sinin").value;
+        var chs=document.getElementById("sinch").value;
+        chs=chs*1;
+        if(chs===0)chs=10000;
         var output=new String();
         if(document.getElementById("sine").checked){
             var key=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
@@ -129,8 +132,13 @@
                 if(test>0x0040 && test<0x005B){
                     test-=65;
                     test=key[test];
-                    test+=64;
-                    output+=String.fromCharCode(test);
+                    if(document.getElementById("sinc").checked){
+                        test+=64;
+                        output+=String.fromCharCode(test);
+                    }
+                    else{
+                        output+=String.fromCharCode(test+chs);
+                    }
                 }
                 else output+=String.fromCharCode(test);
             }
@@ -285,6 +293,9 @@
         var output=new String();
         var key=document.getElementById("mskey").value;
         var keyuse=0;
+        var chs=document.getElementById("msch").value;
+        chs=chs*1;
+        if(chs===0)chs=10000;
         key=key.toUpperCase();
         if(document.getElementById("mse").checked){
             if(key.length==0)output="鍵を設定してください";
@@ -295,8 +306,13 @@
                     if(test>0x0040 && test<0x005B){
                         test-=65;
                         test=keyde[key.charCodeAt(keyuse)-65][test];
-                        test+=65;
-                        output+=String.fromCharCode(test);
+                        if(document.getElementById("msc").checked){
+                            test+=65;
+                            output+=String.fromCharCode(test);
+                        }
+                        else{
+                            output+=String.fromCharCode(test+chs);
+                        }
                         keyuse++;
                         keyuse%=key.length;
                     }
@@ -407,6 +423,14 @@
                 <input type="radio" name="sinsel">復号化
             </center>
             <center>
+                <input type="radio" name="sincs" id="sinc" checked="true">number
+                <input type="radio" name="sincs" >strange char
+                <b>文字起点</b>
+                <input id="sinch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
+            </center>
+            <center>
                 <button onclick="Sin(); return false;">送信</button>
             </center>
         </form>
@@ -429,6 +453,14 @@
                 <textarea id="mskey" rows="1"></textarea>
                 <input type="radio" name="mssel" id="mse" checked="true">暗号化
                 <input type="radio" name="mssel">復号化
+            </center>
+            <center>
+                <input type="radio" name="mscs" id="msc" checked="true">number
+                <input type="radio" name="mscs" >strange char
+                <b>文字起点</b>
+                <input id="msch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
             </center>
             <center>
                 <button onclick="Ms(); return false;">送信</button>
