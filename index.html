@@ -160,6 +160,14 @@
                 <input type="radio" name="sinsel">復号化
             </center>
             <center>
+                <input type="radio" name="sincs" id="sinc" checked="true">number
+                <input type="radio" name="sincs" >strange char
+                <b>文字起点</b>
+                <input id="sinch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
+            </center>
+            <center>
                 <button onclick="Sin(); return false;">送信</button>
             </center>
         </form>
@@ -182,6 +190,14 @@
                 <textarea id="mskey" rows="1"></textarea>
                 <input type="radio" name="mssel" id="mse" checked="true">暗号化
                 <input type="radio" name="mssel">復号化
+            </center>
+            <center>
+                <input type="radio" name="mscs" id="msc" checked="true">number
+                <input type="radio" name="mscs" >strange char
+                <b>文字起点</b>
+                <input id="msch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
             </center>
             <center>
                 <button onclick="Ms(); return false;">送信</button>
