@@ -316,6 +316,12 @@
                         keyuse++;
                         keyuse%=key.length;
                     }
+                    else if(test>=48 && test<=57){
+                        output+=String.fromCharCode(0x1600);
+                        output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        keyuse++;
+                        keyuse%=key.length;
+                    }
                     else output+=String.fromCharCode(test);
                 }
             }
@@ -426,7 +432,7 @@
                 <input type="radio" name="sincs" id="sinc" checked="true">number
                 <input type="radio" name="sincs" >strange char
                 <b>文字起点</b>
-                <input id="sinch" type="text" size="18" maxlength="10">
+                <input id="sinch" type="number" size="18" maxlength="10" step="100">
                 <br>
                 <p>recommend:700,1000,14000,107400</p>
             </center>
