@@ -317,7 +317,9 @@
                         keyuse%=key.length;
                     }
                     else if(test>=48 && test<=57){
-                        output+=String.fromCharCode(0x1600);
+                        output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        keyuse++;
+                        keyuse%=key.length;
                         output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
                         keyuse++;
                         keyuse%=key.length;
