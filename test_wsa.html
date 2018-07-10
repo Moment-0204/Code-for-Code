@@ -22,16 +22,19 @@
         }
 
         function sea() {
-            var name=[
-                "暗号",
-                "電子工作"
+            var data=[
+                ["暗号","暗号同好会 4A教室前半","高校棟3階　4年A組　まえ半分"],
+                ["工作","電子工作部 6C教室","高校棟1階　6年C組"]
             ];
             var test=document.getElementById("result_text").value;
             document.getElementById("out").value="1";
             var outt="見つかりません";
-            if(test.indexOf(name[0])!==-1)outt="暗号同好会";
-            else if(test.indexOf(name[1])!==-1)outt="電子工作部";
-            document.getElementById("out").value=outt;
+            for(var i=0;i<data.length;i++){
+                if(test.indexOf(data[i][0])!==-1){
+                    outt=data[i][2];
+                    document.getElementById("out").value=data[i][1];
+                }
+            }
 
             // 発話機能をインスタンス化
             var msg = new SpeechSynthesisUtterance();
