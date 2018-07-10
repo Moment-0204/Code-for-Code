@@ -23,8 +23,8 @@
 
         function sea() {
             var data=[
-                ["暗号","暗号同好会 4A教室前半","高校棟3階　4年A組　まえ半分"],
-                ["工作","電子工作部 6C教室","高校棟1階　6年C組"]
+                ["暗号","暗号同好会 4A教室前半","暗号同好会　高校棟3階　4年A組　まえ半分"],
+                ["工作","電子工作部 6C教室","電子工作部　高校棟1階　6年C組"]
             ];
             var test=document.getElementById("result_text").value;
             document.getElementById("out").value="1";
@@ -61,13 +61,14 @@
 
 <body>
 <h1 style="text-align: center">test page</h1>
+<div style="text-align: center;">PC・Android版Chromeでのみ音声入力が、多くのブラウザで音声案内が利用可能</div>
 <center>
-<input id="result_text" type="text" size="18" maxlength="10">
+<input id="result_text" type="text" style="font-size: x-large" size="18" maxlength="10">
 <input type="button" onClick="record()" value="入力" />
 <br>
 <input type="button" onclick="sea()" value="検索">
 <br>
-<input id="out" type="text">
+<input id="out" type="text" size="30" style="font-size: x-large">
 </center>
 </body>
 </html>
