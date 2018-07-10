@@ -29,16 +29,16 @@
             var test=document.getElementById("result_text").value;
             document.getElementById("out").value="1";
             var outt="見つかりません";
-            if(test.indexOf(name[0])!==-1)outt="あ暗号同好会";
+            if(test.indexOf(name[0])!==-1)outt="暗号同好会";
             else if(test.indexOf(name[1])!==-1)outt="電子工作部";
             document.getElementById("out").value=outt;
 
             // 発話機能をインスタンス化
             var msg = new SpeechSynthesisUtterance();
-            var voices = window.speechSynthesis.getVoices();
+            //var voices = window.speechSynthesis.getVoices();
 
             // 以下オプション設定（日本語は効かないもよう。。）
-            msg.voice = voices[7]; // 7:Google 日本人 ja-JP ※他は英語のみ（次項参照）
+            //msg.voice = voices[7]; // 7:Google 日本人 ja-JP ※他は英語のみ（次項参照）
             msg.volume = 1.0; // 音量 min 0 ~ max 1
             msg.rate = 1.0; // 速度 min 0 ~ max 10
             msg.pitch = 1.0; // 音程 min 0 ~ max 2
@@ -49,6 +49,9 @@
 
             // 発話実行
             speechSynthesis.speak(msg);
+            //msg.onend = function(event) {
+            //    alert('Finished in ' + event.elapsedTime + ' seconds.');
+            //};
         }
     </script>
 </head>
