@@ -20,8 +20,15 @@
             recognition.start();
         }
         
-        function go() {
-
+        function sea() {
+            var name=[
+                "暗号",
+                "電子工作"
+            ];
+            var test=document.getElementById("result_text").value;
+            document.getElementById("out").value="1";
+            if(test.indexOf(name[0])!==-1)document.getElementById("out").value="暗号同好会";
+            else if(test.indexOf(name[1])!==-1)document.getElementById("out").value="電子工作部";
         }
     </script>
 </head>
@@ -29,12 +36,12 @@
 <body>
 <h1 style="text-align: center">test page</h1>
 <center>
-<textarea id="result_text1" cols="10" rows="1">
-</textarea>
 <input id="result_text" type="text" size="18" maxlength="10">
 <input type="button" onClick="record()" value="入力" />
 <br>
-<input type="button" onclick="go()" value="検索">
+<input type="button" onclick="sea()" value="検索">
+<br>
+<input id="out" type="text">
 </center>
 </body>
 </html>
