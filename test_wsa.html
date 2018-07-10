@@ -7,6 +7,7 @@
         window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
         var recognition = new webkitSpeechRecognition();
         recognition.lang = 'ja';
+        recognition.interimResults = true;
 
         // 録音終了時トリガー
         recognition.addEventListener('result', function(event){
@@ -19,7 +20,7 @@
         {
             recognition.start();
         }
-        
+
         function sea() {
             var name=[
                 "暗号",
@@ -27,8 +28,27 @@
             ];
             var test=document.getElementById("result_text").value;
             document.getElementById("out").value="1";
-            if(test.indexOf(name[0])!==-1)document.getElementById("out").value="暗号同好会";
-            else if(test.indexOf(name[1])!==-1)document.getElementById("out").value="電子工作部";
+            var outt="見つかりません";
+            if(test.indexOf(name[0])!==-1)outt="あ暗号同好会";
+            else if(test.indexOf(name[1])!==-1)outt="電子工作部";
+            document.getElementById("out").value=outt;
+
+            // 発話機能をインスタンス化
+            var msg = new SpeechSynthesisUtterance();
+            var voices = window.speechSynthesis.getVoices();
+
+            // 以下オプション設定（日本語は効かないもよう。。）
+            msg.voice = voices[7]; // 7:Google 日本人 ja-JP ※他は英語のみ（次項参照）
+            msg.volume = 1.0; // 音量 min 0 ~ max 1
+            msg.rate = 1.0; // 速度 min 0 ~ max 10
+            msg.pitch = 1.0; // 音程 min 0 ~ max 2
+
+            msg.text = outt; // 喋る内容
+            msg.lang = 'ja-JP'; // en-US or ja-JP
+            // msg.lang = 'en-US'; // en-US or ja-JP
+
+            // 発話実行
+            speechSynthesis.speak(msg);
         }
     </script>
 </head>
