@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Web Speech API</title>
+    <title>音声案内</title>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
         window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
@@ -27,7 +27,7 @@
                 ["工作","電子工作部 6C教室","電子工作部　高校棟1階　6年C組"]
             ];
             var test=document.getElementById("result_text").value;
-            document.getElementById("out").value="1";
+            document.getElementById("out").value="見つかりません";
             var outt="見つかりません";
             for(var i=0;i<data.length;i++){
                 if(test.indexOf(data[i][0])!==-1){
@@ -70,5 +70,12 @@
 <br>
 <input id="out" type="text" size="30" style="font-size: x-large">
 </center>
+<!-- シェアボタンに変換される -->
+<a class="twitter-share-button" href="https://twitter.com/share" data-dnt="true" style="float: right">Tweet</a>
+
+<!-- [head]内や、[body]の終了直前などに配置 -->
+<script>
+    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+</script>
 </body>
 </html>
