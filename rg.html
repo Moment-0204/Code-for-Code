@@ -86,13 +86,14 @@
             var outmessage = "見つかりません";
             for (var i = 0; i < data.length; i++) {
                 if (test.indexOf(data[i][0]) !== -1) {
-                    //var tocode = data[i][4];
+                    var tocode = data[i][4];
                     outmessage = data[i][2];
                     document.getElementById("out_to").value = data[i][1];
                     break;
                 }
             }
 
+            document.getElementById("out_from").value="safe";
             var test = document.getElementById("result_text_dep").value;
             document.getElementById("out_from").value = "見つかりません";
             for (var i = 0; i < data.length; i++) {
@@ -113,7 +114,7 @@
             msg.rate = 1.0; // 速度 min 0 ~ max 10
             msg.pitch = 1.0; // 音程 min 0 ~ max 2
 
-            msg.text = "こんにちは"//outmessage; // 喋る内容
+            msg.text = outmessage; // 喋る内容
             msg.lang = 'ja-JP'; // en-US or ja-JP
             // msg.lang = 'en-US'; // en-US or ja-JP
 
@@ -145,7 +146,7 @@
 </head>
 
 <body>
-<h1 style="text-align: center">test page for 54回菁々祭教室案内1</h1>
+<h1 style="text-align: center">test page for 54回菁々祭教室案内</h1>
 <div style="text-align: center;">PC・Android版Chromeでのみ音声入力が、多くのブラウザで音声案内が利用可能</div>
 <center>
     目的地
