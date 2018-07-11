@@ -184,5 +184,16 @@
         return t;
     }(document, "script", "twitter-wjs"));
 </script>
+<script>
+    var codefordenkou = 26;
+    var codemax = 36;
+    var dep = codefordenkou;
+    var match = location.search.match(/d=(.*?)(&|$)/);
+    if (match) {
+        dep = decodeURIComponent(match[1]);
+        if (dep < 0 || dep > codemax) dep = codefordenkou;
+    }
+    document.getElementById("result_text_dep").value = data[dep][3];
+</script>
 </body>
 </html>
