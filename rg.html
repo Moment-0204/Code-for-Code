@@ -43,7 +43,7 @@
             ["東", "東菁会　演習室A", "東菁会　図書館棟　図書館下　演習室A", "東菁会", 420],
             ["お化け", "お化け屋敷　演習室B・C", "お化け屋敷　図書館棟　図書館下　演習室B　演習室C", "お化け屋敷", 420]
         ];
-        
+
         var mode = 1;
         window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
         var recognition = new webkitSpeechRecognition();
@@ -132,7 +132,7 @@
             }
         }
 
-        window.onload = function () {
+        $(window).on('load',function(){
             var codefordenkou = 26;
             var codemax = 36;
             var dep = codefordenkou;
@@ -142,7 +142,7 @@
                 if (dep < 0 || dep > codemax) dep = codefordenkou;
             }
             document.getElementById("result_text_dep").value = data[dep][3];
-        }
+        });
     </script>
 </head>
 
