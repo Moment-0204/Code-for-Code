@@ -81,7 +81,7 @@
         ];
 
         function search() {
-            var test = document.getElementById("result_text_des").value;
+            /*var test = document.getElementById("result_text_des").value;
             document.getElementById("out_to").value = "見つかりません";
             var outmessage = "見つかりません";
             for (var i = 0; i < data.length; i++) {
@@ -91,9 +91,9 @@
                     document.getElementById("out_to").value = data[i][1];
                     break;
                 }
-            }
+            }*/
 
-            /*var test = document.getElementById("result_text_dep").value;
+            var test = document.getElementById("result_text_dep").value;
             document.getElementById("out_from").value = "見つかりません";
             for (var i = 0; i < data.length; i++) {
                 if (test.indexOf(data[i][0]) !== -1) {
@@ -101,7 +101,7 @@
                     document.getElementById("out_from").value = data[i][1];
                     break;
                 }
-            }*/
+            }
 
             // 発話機能をインスタンス化
             var msg = new SpeechSynthesisUtterance();
@@ -145,7 +145,7 @@
 </head>
 
 <body>
-<h1 style="text-align: center">test page for 54回菁々祭教室案内</h1>
+<h1 style="text-align: center">test page for 54回菁々祭教室案内1</h1>
 <div style="text-align: center;">PC・Android版Chromeでのみ音声入力が、多くのブラウザで音声案内が利用可能</div>
 <center>
     目的地
