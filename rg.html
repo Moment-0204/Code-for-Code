@@ -134,7 +134,7 @@
             var codefordenkou = 26;
             var codemax = 36;
             var dep = codefordenkou;
-            var match = location.search.match(/dep=(.*?)(&|$)/);
+            var match = location.search.match(/d=(.*?)(&|$)/);
             if (match) {
                 dep = decodeURIComponent(match[1]);
                 if (dep < 0 || dep > codemax) dep = codefordenkou;
