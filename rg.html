@@ -4,6 +4,18 @@
     <title>音声案内</title>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
+
+        /*
+        data code 説明
+        ABC
+        A 棟
+         1中学棟 2高校棟 3渡り廊下 4図書館棟
+        B 階
+         1中学棟1階 2中学棟2階(高校棟1階) 3中学棟3階(高校棟2階) 4高校棟3階
+        C 場所
+         0階段右 1A 2B 3C 4D 5E
+         */
+
         var data = [
             ["書道", "書道部 1A教室", "書道部　中学棟1階　1年A組", "書道部", 111],
             ["将棋", "囲碁将棋部 2A教室", "囲碁将棋部　中学棟2階　2年A組", "囲碁将棋部", 121],
@@ -69,26 +81,14 @@
             recognition.start();
         }
 
-        /*
-        data code 説明
-        ABC
-        A 棟
-         1中学棟 2高校棟 3渡り廊下 4図書館棟
-        B 階
-         1中学棟1階 2中学棟2階(高校棟1階) 3中学棟3階(高校棟2階) 4高校棟3階
-        C 場所
-         0階段右 1A 2B 3C 4D 5E
-         */
-
-
-
         function search() {
+            var tocode,tofrom;
             var test = document.getElementById("result_text_des").value;
             document.getElementById("out_to").value = "見つかりません";
             var outmessage = "見つかりません";
             for (var i = 0; i < data.length; i++) {
                 if (test.indexOf(data[i][0]) !== -1) {
-                    var tocode = data[i][4];
+                    tocode = data[i][4];
                     outmessage = data[i][2];
                     document.getElementById("out_to").value = data[i][1];
                     break;
@@ -99,7 +99,7 @@
             document.getElementById("out_from").value = "見つかりません";
             for (var i = 0; i < data.length; i++) {
                 if (test.indexOf(data[i][0]) !== -1) {
-                    //var tofrom = data[i][4];
+                    tofrom = data[i][4];
                     document.getElementById("out_from").value = data[i][1];
                     break;
                 }
@@ -124,6 +124,48 @@
             //msg.onend = function(event) {
             //    alert('Finished in ' + event.elapsedTime + ' seconds.');
             //};
+
+            //search section
+            var path='';
+            if(Math.floor(tocode/10)===Math.floor(tofrom/10)){ //同じ階
+                path+='同じ階です';
+            }
+            else if(Math.floor(tocode/100)===Math.floor(tofrom/100)){ //同じ棟
+                switch(Math.floor(tofrom/100)){
+                    case 1: //中学棟
+                        path+='階段で中学棟'+Math.floor(tofrom/10%10)+'階から'+Math.floor(tocode/10%10)+'階まで移動してください';
+                        break;
+                    case 2: //高校棟
+                        path+='階段で高校棟'+ (Math.floor(tofrom/10%10)-1) +'階から'+(Math.floor(tocode/10%10)-1)+'階まで移動してください';
+                        break;
+                }
+            }
+            else if(tocode===330 || tofrom===330){
+                if(tocode===330){ //todo: 出発地で分岐
+                    path+="階段で中学棟3階または高校棟2階まで移動してください。\n" +
+                          "渡り廊下中央にあります。"
+                }
+                else{
+                    if(Math.floor(tocode/100)===1){
+                        path+="中学棟3階側に移動して、階段で中学棟3階から"+Math.floor(tocode/10%10)+'階まで移動してください';
+                    }
+                    else if(Math.floor(tocode/100)===2){
+                        path+="高校棟2階側に移動して、階段で高校棟2階から"+(Math.floor(tocode/10%10)-1)+'階まで移動してください';
+                    }
+                }
+            }
+            else if(Math.floor(tocode/100)===4){
+                path+="中学棟2階または高校棟1階昇降口まで移動してください。\n高校棟昇降口向かって左の図書館棟に入ってください。"
+            }
+            else if(Math.floor(tofrom/100)===4){
+                if(Math.floor(tocode/100)===2){
+                    path+="高校棟昇降口まで降りたあと、階段で高校棟1階から"+(Math.floor(tocode/10%10)-1)+'階まで移動してください';
+                }
+                else{
+                    path+="高校棟昇降口まで降りたあと、中学棟昇降口へ向かい階段で中学棟2階から"+(Math.floor(tocode/10%10))+'階まで移動してください';
+                }
+            }
+            document.getElementById("route").value=path;
         }
 
         function keydown() {
@@ -155,6 +197,8 @@
     from<input id="out_from" type="text" size="36" style="font-size: x-large" readonly="readonly">
     <br>
     to<input id="out_to" type="text" size="36" style="font-size: x-large" readonly="readonly">
+    <br>
+    <textarea rows="10" cols="30" id="route" style="font-size: x-large" readonly="readonly"></textarea>
 </center>
 <!-- シェアボタンに変換される -->
 <a class="twitter-share-button" href="https://twitter.com/share" data-dnt="true" style="float: right">Tweet</a>
