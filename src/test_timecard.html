@@ -8,6 +8,7 @@
     </style>
     <script>
         function ch() {
+            var key=["shakatsu","futsukame"];
             var k=document.getElementById("key").value;
             var t=document.cookie;
             var today=new Date();
@@ -25,7 +26,13 @@
                     n=temp[0];
                 }
             }
-            if(k==="shakatsu")if(n.substr(-4,3)!==now){n+=now+'n';alert("attendance check success");}
+            if(k===key[now-721]){
+                //alert(1);
+                if(n.substr(-4,3)!==now){
+                    n+=now+'n';
+                    alert("attendance check success");
+                }
+            }
             var count=0;
             document.cookie='data='+n;
             //alert(n);
