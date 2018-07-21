@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style type="text/css">
+
+
+    </style>
+    <script type="text/javascript" src="grid.js"></script>
+    <script type="text/javascript" src="version.js"></script>
+    <script type="text/javascript" src="detector.js"></script>
+    <script type="text/javascript" src="formatinf.js"></script>
+    <script type="text/javascript" src="errorlevel.js"></script>
+    <script type="text/javascript" src="bitmat.js"></script>
+    <script type="text/javascript" src="datablock.js"></script>
+    <script type="text/javascript" src="bmparser.js"></script>
+    <script type="text/javascript" src="datamask.js"></script>
+    <script type="text/javascript" src="rsdecoder.js"></script>
+    <script type="text/javascript" src="gf256poly.js"></script>
+    <script type="text/javascript" src="gf256.js"></script>
+    <script type="text/javascript" src="decoder.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+    <script type="text/javascript" src="findpat.js"></script>
+    <script type="text/javascript" src="alignpat.js"></script>
+    <script type="text/javascript" src="databr.js"></script>
+    <script type="text/javascript">
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia;
+        window.URL = window.URL || window.webkitURL;
+
+        var video = document.getElementById('myVideo');
+        var localStream = null;
+        navigator.getUserMedia({video: true, audio: false},
+            function (stream) {
+                video.src = window.URL.createObjectURL(stream);
+                localStream = stream;
+            },
+            function (err) {
+            }
+        );
+
+        function decodeImageFromBase64(data, callback) {
+            qrcode.callback = callback;
+            qrcode.decode(data)
+        }
+
+        document.getElementById("action").addEventListener('click', function () {
+            if (localStream) {
+                var canvas = document.getElementById('canvas');
+                var ctx = canvas.getContext('2d');
+                var img = document.getElementById('img');
+
+                var w = video.offsetWidth;
+                var h = video.offsetHeight;
+
+                canvas.setAttribute("width", w);
+                canvas.setAttribute("height", h);
+
+                //canvasにコピー
+                ctx.drawImage(video, 0, 0, w, h);
+
+                // デコード.
+                decodeImageFromBase64(canvas.toDataURL('image/png'), function (decodedInformation) {
+                    alert(decodedInformation);
+                });
+            }
+        }, false);
+    </script>
+</head>
+<body oncontextmenu="alert('笑笑');return false">
+<h1>サンプル</h1>
+
+<video id="video" width="300" height="200" autoplay="1"></video>
+<img id="img">
+<div style="display:none">
+    <canvas id="canvas"></canvas>
+</div>
+<input type="button" id="action" value="decode"/>
+</body>
+</html>
