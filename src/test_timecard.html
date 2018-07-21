@@ -14,16 +14,23 @@
             if(today.getDate()<10)now+='0';
             now+=today.getDate().toString();
             //alert(now);
-            var n;
+            var n='n';
+            alert(t);
+
             for(var i=0;i<t.length-3;i++){
-                if(t.substr(i,4)==="data")n=t.substr(i+5);
+                if(t.substr(i,4)==="data"){
+                    n=t.substr(i+5);
+                    var temp=n.split(';');
+                    n=temp[0];
+                }
             }
-            if(n.substr(-3)!==now)n+=now;
+            if(n.substr(-4,3)!==now)n+=now+'n';
+            document.cookie='data='+n;
             alert(n);
-            var re=t.split('n');
+            var re=n.split('n');
             var st=String();
-            //alert(re.length);
-            for(var i=1;i<re.length-1;i++){
+            alert(re.length);
+            for(var i=1;i<re.length;i++){
                 st+=re[i]+"\n";
             }
             document.getElementById("test").value=st;
