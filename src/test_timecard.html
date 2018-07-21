@@ -25,7 +25,8 @@
                     n=temp[0];
                 }
             }
-            if(k==="shakatsu")if(n.substr(-4,3)!==now)n+=now+'n';
+            if(k==="shakatsu")if(n.substr(-4,3)!==now){n+=now+'n';alert("attendance check success");}
+            var count=0;
             document.cookie='data='+n;
             //alert(n);
             var re=n.split('n');
@@ -33,16 +34,19 @@
             //alert(re.length);
             for(var i=1;i<re.length-1;i++){
                 st+=Math.floor(re[i]/100)+"月"+re[i]%100+"日"+"\n";
+                count++;
             }
             document.getElementById("test").value=st;
+            document.getElementById("count").value=count;
         }
     </script>
 </head>
 <body oncontextmenu="alert('笑笑');return false">
 <center>
     <h1>出席日</h1>
-    <textarea id="test" cols="10" rows="20"></textarea>
+    <textarea id="test" cols="7" rows="20"></textarea>
     <br>
+    <input id="count" size="2" readonly="readonly" value="0">日出席
     <input type="text" id="key"><button onclick="ch();">submit</button>
 </center>
 </body>
