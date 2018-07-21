@@ -8,6 +8,7 @@
     </style>
     <script>
         function ch() {
+            var k=document.getElementById("key").value;
             var t=document.cookie;
             var today=new Date();
             var now=(today.getMonth()+1).toString();
@@ -24,7 +25,7 @@
                     n=temp[0];
                 }
             }
-            if(n.substr(-4,3)!==now)n+=now+'n';
+            if(k==="shakatsu")if(n.substr(-4,3)!==now)n+=now+'n';
             document.cookie='data='+n;
             //alert(n);
             var re=n.split('n');
@@ -38,8 +39,11 @@
     </script>
 </head>
 <body oncontextmenu="alert('笑笑');return false">
-<h1>sample</h1>
-<button onclick="ch();">test</button>
-<textarea id="test" cols="20" rows="20"></textarea>
+<center>
+    <h1>出席日</h1>
+    <textarea id="test" cols="10" rows="20"></textarea>
+    <br>
+    <input type="text" id="key"><button onclick="ch();">submit</button>
+</center>
 </body>
 </html>
