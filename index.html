@@ -317,10 +317,12 @@
                         keyuse%=key.length;
                     }
                     else if(test>=48 && test<=57){
-                        output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        //output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        output+=String.fromCharCode(keyde[key.charCodeAt(keyuse)-65][test-48]+65);
                         keyuse++;
                         keyuse%=key.length;
-                        output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        //output+=String.fromCharCode((test-48+key.charCodeAt(keyuse))%26+65);
+                        output+=String.fromCharCode(keyde[key.charCodeAt(keyuse)-65][test-48]+65);
                         keyuse++;
                         keyuse%=key.length;
                     }
@@ -359,6 +361,7 @@
 </head>
 <body oncontextmenu="alert('笑笑');return false">
 <p><div style="font-size:300%; text-align:left; float:left">For Code</div><div style="font-size:300%; text-align:left" class="mirror-text">For Code</div></p>
+<center><a href="gunsei.html">群聲に出した問題はこちら</a></center>
 <div class="tabbox">
     <p class="tabs">
         <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">シーザー</a>
