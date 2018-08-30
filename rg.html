@@ -177,7 +177,7 @@
 
     </script>
     <style>
-        #map {
+        #mapId {
             width: 75%;
             height: 75%;
         }
@@ -210,19 +210,15 @@
 </center>
 
 <center>
-    <div id="map"></div>
+    <div id="mapId"></div>
     <script>
-        var map = L.map('map', {
-            maxZoom: 24,
-            minZoom: 1,
+        myMap = L.map('mapId', {
             crs: L.CRS.Simple
-        }).setView([0, 0], 1);
-        map.setMaxBounds(new L.LatLngBounds([0, 345], [230, 0])); //表示可能範囲
-        var imageUrl = 'http://moment-0204.github.io/Code-for-Code/map.png';
-        var imageBounds = [[230, 0], [0, 345]]; //初期表示範囲
-        L.imageOverlay(imageUrl, imageBounds, {
-            attribution: ''
-        }).addTo(map);
+        });
+        var bounds = [[0, 0], [500, 700]]; //Leaflet の画像を配置する領域を指定
+        var image = L.imageOverlay('map.png', bounds).addTo(myMap); //imageOverlay に使用したい画像パスを記述
+        myMap.fitBounds(bounds); //画像を bounds にフィットさせる
+        myMap.setMaxBounds(bounds); //画像の 移動可能領域を bounds に指定
     </script>
 </center>
 
