@@ -218,13 +218,14 @@
             crs: L.CRS.Simple
         }).setView([0, 0], 1);
         map.setMaxBounds(new L.LatLngBounds([0, 345], [230, 0])); //表示可能範囲
-        var imageUrl = 'map.png';
+        var imageUrl = 'https://moment-0204.github.io/Code-for-Code/map.png';
         var imageBounds = [[230, 0], [0, 345]]; //初期表示範囲
         L.imageOverlay(imageUrl, imageBounds, {
             attribution: ''
         }).addTo(map);
     </script>
 </center>
+
 <!-- シェアボタンに変換される -->
 <a class="twitter-share-button" href="https://twitter.com/share" data-dnt="true" style="float: right">Tweet</a>
 
