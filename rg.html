@@ -176,6 +176,12 @@
 
 
     </script>
+    <style>
+        #map {
+            width: 75%;
+            height: 75%;
+        }
+    </style>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 </head>
@@ -203,21 +209,22 @@
     <textarea rows="10" cols="30" id="route" style="font-size: x-large" readonly="readonly"></textarea>
 </center>
 
-<div id="map"></div>
-<script>
-    var map = L.map('map', {
-        maxZoom: 24,
-        minZoom: 1,
-        crs: L.CRS.Simple
-    }).setView([0, 0], 1);
-    map.setMaxBounds(new L.LatLngBounds([0, 345], [230, 0])); //表示可能範囲
-    var imageUrl = '';
-    var imageBounds = [[230, 0], [0, 345]]; //初期表示範囲
-    L.imageOverlay(imageUrl, imageBounds, {
-        attribution: ''
-    }).addTo(map);
-</script>
-
+<center>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map', {
+            maxZoom: 24,
+            minZoom: 1,
+            crs: L.CRS.Simple
+        }).setView([0, 0], 1);
+        map.setMaxBounds(new L.LatLngBounds([0, 345], [230, 0])); //表示可能範囲
+        var imageUrl = 'map.png';
+        var imageBounds = [[230, 0], [0, 345]]; //初期表示範囲
+        L.imageOverlay(imageUrl, imageBounds, {
+            attribution: ''
+        }).addTo(map);
+    </script>
+</center>
 <!-- シェアボタンに変換される -->
 <a class="twitter-share-button" href="https://twitter.com/share" data-dnt="true" style="float: right">Tweet</a>
 
