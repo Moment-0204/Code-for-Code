@@ -1,0 +1,164 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TAC open cup 1st</title>
+<style type="text/css">
+    body{
+        background-color:white ;
+    }
+    textarea{
+        width:100%;
+    }
+    /* 表示領域全体 */
+    div.tabbox {
+        margin: 0px; padding: 0px;
+    }
+
+    /* タブ部分 */
+    p.tabs { margin: 0px; padding: 0px; }
+    p.tabs a {
+        display: block; width: 5em; float: left;
+        margin: 0px 1px 0px 0px; padding: 3px;
+        text-align: center;
+        border-radius: 12px 12px 0px 0px; /* 角を丸くする */
+    }
+    p.tabs a.tab1 { background-color: blue; color: white; }
+    p.tabs a.tab2 { background-color: #aaaa00; color:white;}
+    p.tabs a.tab3 { background-color: red; color: white; }
+    p.tabs a.tab4 { background-color: blueviolet; color: white;}
+    p.tabs a:hover { color: yellow; }
+
+    /* タブ中身のボックス */
+    div.tab {  overflow: auto; clear: left; }
+    div#tab1 {
+        border: 2px solid blue; background-color: #ccffff;
+    }
+    div#tab2 {
+        border: 2px solid #aaaa00; background-color: #ffffcc;
+    }
+    div#tab2 iframe{
+        width: 100%;
+    }
+    div#tab3 {
+        border: 2px solid red; background-color: #ffcccc;
+    }
+    div#tab4 {
+        border: 2px solid blueviolet; background-color: #a849f0;
+    }
+    div.tab p { margin: 0.5em; }
+</style>
+<script type="text/javascript">
+    function ChangeTab(tabname) {
+        // 全部消す
+        document.getElementById('tab1').style.display = 'none';
+        document.getElementById('tab2').style.display = 'none';
+        document.getElementById('tab3').style.display = 'none';
+        document.getElementById('tab4').style.display = 'none';
+        // 指定箇所のみ表示
+        document.getElementById(tabname).style.display = 'block';
+    }
+</script>
+</head>
+<body oncontextmenu="alert('笑笑');return false">
+<div style="font-size:300%; text-align:left; float:left">For Code</div><br><br><br><br>
+<div class="tabbox">
+    <p class="tabs">
+        <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">シーザー</a>
+        <a href="#tab2" class="tab2" onclick="ChangeTab('tab2'); return false;">単表式</a>
+        <a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false;">多表式</a>
+        <a href="#tab4" class="tab4" onclick="ChangeTab('tab4'); return false;">ＨＭＴ</a>
+    </p>
+    <div id="tab1" class="tab">
+        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeauEO1Sxd7Z9yK4fnd6j7zeCYRV-EoNbemjr6BVFPJPZ6_oQ/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+            <dir>
+                <label>答え</label>
+                <input id="name" type="text" name="entry.875776795" required="required">
+            <button type="submit" name="button" value="送信"></button>
+            </dir>
+        </form>
+    </div>
+    <div id="tab2" class="tab">
+        <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    </div>
+    <div id="tab3" class="tab">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="msin" rows="10"></textarea>
+            </center><br>
+            <center>
+                <b>鍵</b>
+                <textarea id="mskey" rows="1"></textarea>
+                <input type="radio" name="mssel" id="mse" checked="true">暗号化
+                <input type="radio" name="mssel">復号化
+            </center>
+            <center>
+                <input type="radio" name="mscs" id="msc" checked="true">number
+                <input type="radio" name="mscs" >strange char
+                <b>文字起点</b>
+                <input id="msch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
+            </center>
+            <center>
+                <button onclick="Ms(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
+        <center>
+            <textarea id="msout" rows="10"></textarea>
+        </center>
+    </div>
+    <div id="tab4" class="tab">
+        <p>
+        <h1>入力</h1>
+        <form action="">
+            <center>
+                <textarea id="hmin" rows="10"></textarea>
+            </center>
+            <br>
+            <center>
+                <b>鍵</b>
+                <textarea id="hmkey" rows="1"></textarea>
+                <input type="radio" name="hmsel" id="hme" checked="true">暗号化
+                <input type="radio" name="hmsel" disabled="disabled">復号化
+            </center>
+            <center>
+                <input type="radio" name="hmcs" id="hmc" checked="true">number
+                <input type="radio" name="hmcs" >strange char
+                <b>文字起点</b>
+                <input id="hmch" type="text" size="18" maxlength="10">
+                <br>
+                <p>recommend:700,1000,14000,107400</p>
+            </center>
+            <center>
+                <button onclick="HMT(); return false;">送信</button>
+            </center>
+        </form>
+        </p>
+        <hr>
+        <h1>出力</h1>
+        <center>
+            <textarea id="hmout" rows="10"></textarea>
+        </center>
+        <p>
+            <h1>表</h1>
+            <center>
+                <textarea id="hmkeyo" rows="26"></textarea>
+            </center>
+        </p>
+    </div>
+</div>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){ChangeTab('tab2');}"></iframe>
+<!--<p style="text-align:right">#HMT->Homophonic Multi Table by T.N.</p>-->
+<script type="text/javascript">
+    // デフォルトのタブを選択
+    ChangeTab('tab1');
+</script>
+<p><div style="text-align:left; float:left"><a href="tac.html">for member</a></div><div style="text-align:right"><a href="readme.html">README</a></div></p>
+<!--<center><h3>Presented by T.N.</h3></center>-->
+</body>
+</html>
