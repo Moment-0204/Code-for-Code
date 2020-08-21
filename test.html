@@ -71,13 +71,31 @@
         document.getElementById('tab7').style.display = 'none';
         // 指定箇所のみ表示
         document.getElementById(tabname).style.display = 'block';
+        if(tabname==='tab7')sta();
     }
 
-    function reloadstanding(){
-        //var sta=document.getElementById('standing');
-        //sta.contentWindow.location.reload(true);
-        document.getElementById("foo").contentWindow.location.reload();
-        //location.reload(true);
+    function sta(){
+        var table=document.getElementById("sta");
+        var num=table.rows.length;
+        if(num>1)for(var i=1; i<num; i++)table.deleteRow(1);
+        var url = 'https://script.google.com/macros/s/AKfycbwk9HbcvIjCKwSY_7j9F3EgYWYXAySi3zar9hXaO3cknCdC2vJC/exec'; //遅延情報のJSON
+        fetch(url)
+            .then(function (data) {
+                return data.json(); // 読み込むデータをJSONに設定
+            })
+            .then(function (json) {
+                for (var i = 0; i < json.length; i++) {
+                    var row = document.getElementById('sta').insertRow();
+                    var cell=row.insertCell();cell.textContent = json[i].Rank;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].Participant;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].A;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].B;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].C;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].D;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].E;cell.style.textAlign="center";
+                    cell=row.insertCell();cell.textContent = json[i].Point;cell.style.textAlign="center";
+                }
+            });
     }
 </script>
 </head>
@@ -91,7 +109,7 @@
         <a href="#tab4" class="tab4" onclick="ChangeTab('tab4'); return false;">C</a>
         <a href="#tab4" class="tab5" onclick="ChangeTab('tab5'); return false;">D</a>
         <a href="#tab4" class="tab6" onclick="ChangeTab('tab6'); return false;">E</a>
-        <a href="#tab4" class="tab7" onclick="ChangeTab('tab7'); return false;">standings</a>
+        <a href="#tab4" class="tab7" onclick="ChangeTab('tab7'); return false;">standing</a>
     </p>
     <div id="tab1" class="tab">
         <font size="5">
@@ -102,7 +120,7 @@
             各問題の暗号方式は明らかにされませんが、問題の点数と難易度にはある程度の相関があります。<br>
             問題に正解する度にその問題の点数が加算されます。順位は総合点数→解答にかかった時間の順で決定されます。解答にかかった時間は(最後に正解した問題を解いた時間)+(不正解によるペナルティ:回数×5分)で計算されます(つまり、AtCoderと同じです)。<br>
             提出する度に正解・不正解が判定され(実際とは違う気もしますが……)、順位表にその結果が表示されます：正解→点数が表示、不正解→ペナルティ数のみが表示。<br>
-
+            順位表の元URL:<a href="https://docs.google.com/spreadsheets/d/1JmaWEHwi_0PXRC4wMjf8M0eDvPiYWCURycQv6XAcirg/edit?usp=sharing"target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1JmaWEHwi_0PXRC4wMjf8M0eDvPiYWCURycQv6XAcirg/edit?usp=sharing</a>
         </font>
     </div>
     <div id="tab2" class="tab">
@@ -156,11 +174,22 @@
         <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
     <div id="tab7" class="tab">
-        <iframe width="600" height="400" id="foo" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false&amp;range=A1%3AH11&"></iframe>
-        <button onclick="reloadstanding(); return false;">リロード</button>
+        <table border width="100%" id="sta">
+            <tr align="center">
+                <th>Rank</th>
+                <th>Participant</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>Point</th>
+            </tr>
+        </table>
+        <button onclick="ChangeTab('tab7'); return false;">リロード(毎回する必要あり)</button>
     </div>
 </div>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){ChangeTab('tab7');reloadstanding();}"></iframe>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){ChangeTab('tab7'); return false;}"></iframe>
 <script type="text/javascript">
     // デフォルトのタブを選択
     ChangeTab('tab1');
