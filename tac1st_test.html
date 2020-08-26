@@ -129,15 +129,47 @@
     <div id="tab2" class="tab">
         <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfgvT1x8zwBx8Eq1V8vmSSUkPFpKj7S8v5ww-XfWXOjnCr-Jg/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
             <dir>
+                <label>名前</label>
+                <select id="namea" name="entry.823357701" required="required">
+                    <option>test1</option><option>test2</option><option>test3</option><option>test4</option><option>test5</option>
+                    <option>test6</option><option>test7</option><option>test8</option><option>test9</option><option>test10</option>
+                    <option>test11</option><option>test12</option><option>test13</option><option>test14</option><option>test15</option>
+                </select><br>
                 <label>解答</label>
-                <input id="name" type="text" name="entry.875776795" required="required">
+                <textarea id="ansa" name="entry.66944210" required="required" rows="10" ></textarea>
                 <button type="submit" name="button">送信</button>
             </dir>
         </form>
     </div>
     <div id="tab3" class="tab">
+        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfvBZhZir-cQT9wsNWP682smDLBmgwcRet_fMi_J4wlZch7BA/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+            <dir>
+                <label>名前</label>
+                <select id="nameb" name="entry.1741296081" required="required">
+                    <option>test1</option><option>test2</option><option>test3</option><option>test4</option><option>test5</option>
+                    <option>test6</option><option>test7</option><option>test8</option><option>test9</option><option>test10</option>
+                    <option>test11</option><option>test12</option><option>test13</option><option>test14</option><option>test15</option>
+                </select><br>
+                <label>解答</label>
+                <textarea id="ansb" name="entry.2060414149" required="required" rows="10" ></textarea>
+                <button type="submit" name="button">送信</button>
+            </dir>
+        </form>
     </div>
     <div id="tab4" class="tab">
+        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSd8gxvvy_mPa8i0wrDj-8Fj0UixJ7IuHsUVVY6oVTeebig0nQ/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+            <dir>
+                <label>名前</label>
+                <select id="namec" name="entry.1086458223" required="required">
+                    <option>test1</option><option>test2</option><option>test3</option><option>test4</option><option>test5</option>
+                    <option>test6</option><option>test7</option><option>test8</option><option>test9</option><option>test10</option>
+                    <option>test11</option><option>test12</option><option>test13</option><option>test14</option><option>test15</option>
+                </select><br>
+                <label>解答</label>
+                <textarea id="ansc" name="entry.963802692" required="required" rows="10" ></textarea>
+                <button type="submit" name="button">送信</button>
+            </dir>
+        </form>
     </div>
     <div id="tab5" class="tab">
     </div>
@@ -156,7 +188,7 @@
                 <th>Point</th>
             </tr>
         </table>
-        <button onclick="ChangeTab('tab7'); return false;">リロード(毎回する必要あり)</button>
+        <button onclick="ChangeTab('tab7'); return false;">リロード(提出後は毎回する必要あり)</button>
     </div>
 </div>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){ChangeTab('tab7'); return false;}"></iframe>
