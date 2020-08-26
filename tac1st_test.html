@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TAC open cup 1st</title>
+    <title>TAC open cup 1st testpage</title>
 <style type="text/css">
     body{
         background-color:white ;
@@ -78,7 +78,7 @@
         var table=document.getElementById("sta");
         var num=table.rows.length;
         if(num>1)for(var i=1; i<num; i++)table.deleteRow(1);
-        var url = 'https://script.google.com/macros/s/AKfycbwk9HbcvIjCKwSY_7j9F3EgYWYXAySi3zar9hXaO3cknCdC2vJC/exec'; //遅延情報のJSON
+        var url = 'https://script.google.com/macros/s/AKfycbysI74mY7vtEWON8h4AsPE3ieptNkwNFrTNQ5Cj4_Bgx5q8Ydc/exec'; //遅延情報のJSON
         fetch(url)
             .then(function (data) {
                 return data.json(); // 読み込むデータをJSONに設定
@@ -91,8 +91,8 @@
                     cell=row.insertCell();cell.textContent = json[i].A;cell.style.textAlign="center";
                     cell=row.insertCell();cell.textContent = json[i].B;cell.style.textAlign="center";
                     cell=row.insertCell();cell.textContent = json[i].C;cell.style.textAlign="center";
-                    cell=row.insertCell();cell.textContent = json[i].D;cell.style.textAlign="center";
-                    cell=row.insertCell();cell.textContent = json[i].E;cell.style.textAlign="center";
+                    //cell=row.insertCell();cell.textContent = json[i].D;cell.style.textAlign="center";
+                    //cell=row.insertCell();cell.textContent = json[i].E;cell.style.textAlign="center";
                     cell=row.insertCell();cell.textContent = json[i].Point;cell.style.textAlign="center";
                 }
             });
@@ -100,31 +100,34 @@
 </script>
 </head>
 <body>
-<div style="font-size:300%; text-align:center;">TAC opencup 1st</div>
+<div style="font-size:300%; text-align:center;">TAC opencup 1st testpage</div>
 <div class="tabbox">
     <p class="tabs">
         <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">TOP</a>
         <a href="#tab2" class="tab2" onclick="ChangeTab('tab2'); return false;">A</a>
         <a href="#tab3" class="tab3" onclick="ChangeTab('tab3'); return false;">B</a>
         <a href="#tab4" class="tab4" onclick="ChangeTab('tab4'); return false;">C</a>
-        <a href="#tab4" class="tab5" onclick="ChangeTab('tab5'); return false;">D</a>
-        <a href="#tab4" class="tab6" onclick="ChangeTab('tab6'); return false;">E</a>
+<!--        <a href="#tab4" class="tab5" onclick="ChangeTab('tab5'); return false;">D</a> -->
+<!--        <a href="#tab4" class="tab6" onclick="ChangeTab('tab6'); return false;">E</a> -->
         <a href="#tab4" class="tab7" onclick="ChangeTab('tab7'); return false;">standings</a>
     </p>
     <div id="tab1" class="tab">
         <font size="5">
-            TAC opencup 1stへようこそ！<br>
-            問題は全部で5問です。制限時間は100分です。<br>
-            配点は100-100-200-300-400-800(部分点:0-800)です。<br>
+            TAC opencup 1stのテストページへようこそ！<br>
+            問題は全部で3問です。制限時間はありません。<br>
+            配点は100-100-200(部分点:0-200)です。<br>
             ルール:<br>
             各問題の暗号方式は明らかにされませんが、問題の点数と難易度にはある程度の相関があります。<br>
             問題に正解する度にその問題の点数が加算されます。順位は総合点数→解答にかかった時間の順で決定されます。解答にかかった時間は(最後に正解した問題を解いた時間)+(不正解によるペナルティ:回数×5分)で計算されます(つまり、AtCoderと同じです)。<br>
             提出する度に正解・不正解が判定され(実際とは違う気もしますが……)、順位表にその結果が表示されます：正解→点数が表示、不正解→ペナルティ数のみが表示。<br>
-            順位表の元URL:<a href="https://docs.google.com/spreadsheets/d/1JmaWEHwi_0PXRC4wMjf8M0eDvPiYWCURycQv6XAcirg/edit?usp=sharing"target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1JmaWEHwi_0PXRC4wMjf8M0eDvPiYWCURycQv6XAcirg/edit?usp=sharing</a>
+            順位表の元URL:<a href="https://docs.google.com/spreadsheets/d/1kmwNT-JI5DldVZprKgqNUWYaehOJmgUZrFzbSD0Rp5E/edit?usp=sharing"target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1kmwNT-JI5DldVZprKgqNUWYaehOJmgUZrFzbSD0Rp5E/edit?usp=sharing</a><br>
+            ※テストページの使い方<br>
+            このテストコンテストでは15人分のテストユーザーが登録されています。順位表を見てまだ使われてないユーザーとして解答提出の練習をすると良いでしょう(一度正解するとそれ以降の提出に対してはいかなるリアクションもしないので練習にならないと思われます)。<br>
+            また、便宜上コンテストが8月26日の23時00分スタートという設定で正答時間は計算されます。
         </font>
     </div>
     <div id="tab2" class="tab">
-        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeauEO1Sxd7Z9yK4fnd6j7zeCYRV-EoNbemjr6BVFPJPZ6_oQ/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfgvT1x8zwBx8Eq1V8vmSSUkPFpKj7S8v5ww-XfWXOjnCr-Jg/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
             <dir>
                 <label>解答</label>
                 <input id="name" type="text" name="entry.875776795" required="required">
@@ -133,45 +136,12 @@
         </form>
     </div>
     <div id="tab3" class="tab">
-        <p>
-        <h1>入力</h1>
-        <form action="">
-            <center>
-                <textarea id="msin" rows="10"></textarea>
-            </center><br>
-            <center>
-                <b>鍵</b>
-                <textarea id="mskey" rows="1"></textarea>
-                <input type="radio" name="mssel" id="mse" checked="true">暗号化
-                <input type="radio" name="mssel">復号化
-            </center>
-            <center>
-                <input type="radio" name="mscs" id="msc" checked="true">number
-                <input type="radio" name="mscs" >strange char
-                <b>文字起点</b>
-                <input id="msch" type="text" size="18" maxlength="10">
-                <br>
-                <p>recommend:700,1000,14000,107400</p>
-            </center>
-            <center>
-                <button onclick="Ms(); return false;">送信</button>
-            </center>
-        </form>
-        </p>
-        <hr>
-        <h1>出力</h1>
-        <center>
-            <textarea id="msout" rows="10"></textarea>
-        </center>
     </div>
     <div id="tab4" class="tab">
-        <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
     <div id="tab5" class="tab">
-        <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
     <div id="tab6" class="tab">
-        <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRLfeGACKD53NYTjV8FwoikOFA0ohlW42qu3C4dX3v0Jewi1vLS5lkRIXzL6ro-QXho0rg8xJtXGdyf/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
     <div id="tab7" class="tab">
         <table border width="100%" id="sta">
@@ -181,8 +151,8 @@
                 <th>A</th>
                 <th>B</th>
                 <th>C</th>
-                <th>D</th>
-                <th>E</th>
+                <!--<th>D</th> -->
+                <!--<th>E</th> -->
                 <th>Point</th>
             </tr>
         </table>
