@@ -63,7 +63,16 @@
     $( "#IM" ).draggable({ revert: "valid" });
     $( "#AH" ).draggable({ revert: "valid" })
 
+    $("#NT").on("click", function(){
+	if($("#NT").attr("src")=="NT.png"){
+		$("#NT").attr("src", "NTt.png");
+	}
+	else{
+		$("#NT").attr("src", "NT.png");
+	}
+    });
   } );
+
 </script>
 </body>
 </html>
