@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クロスワード2</title>
+  <link rel="stylesheet" href="./lib/jquery-ui.css">
+  <style>
+  #app {
+    text-align: center;
+  }
+  [id^="draggable"] {
+    display: inline-block;
+    padding: 6px;
+    line-height: 1.0;
+    border: 1px solid #aaa;
+  }
+  
+  #droppable {
+    display: inline-block;
+    width:10em;
+    height: 1em;
+    padding: 6px;
+    line-height: 1.0;
+    border: 1px solid #aaa;
+  }
+  </style>
+  
+</head>
+<body>
+<div id="app"> 
+ 
+<img src="P1.png"></img>
+
+</div>
+
+<div>
+
+<img src="NT.png" id="NT"></img>
+
+<img src="OY.png" id="OY"></img>
+
+<img src="MS.png" id="MS"></img>
+
+<img src="RY.png" id="RY"></img>
+
+<img src="YS.png" id="YS"></img>
+
+<img src="YA.png" id="YA"></img>
+
+<img src="IM.png" id="IM"></img>
+
+<img src="AH.png" id="AH"></img>
+
+</div>
+
+<div>
+
+<img src="NTt.png" id="NTt"></img>
+
+<img src="OYt.png" id="OYt"></img>
+
+<img src="MSt.png" id="MSt"></img>
+
+<img src="RYt.png" id="RYt"></img>
+
+<img src="YSt.png" id="YSt"></img>
+
+<img src="YAt.png" id="YAt"></img>
+
+<img src="IMt.png" id="IMt"></img>
+
+<img src="AHt.png" id="AHt"></img>
+
+</div> 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script>
+  $( function() {
+    $( "#NT" ).draggable({ revert: "valid" });
+    $( "#OY" ).draggable({ revert: "valid" });
+    $( "#MS" ).draggable({ revert: "valid" });
+    $( "#RY" ).draggable({ revert: "valid" });
+    $( "#YS" ).draggable({ revert: "valid" });
+    $( "#YA" ).draggable({ revert: "valid" });
+    $( "#IM" ).draggable({ revert: "valid" });
+    $( "#AH" ).draggable({ revert: "valid" });
+
+
+    $( "#NTt" ).draggable({ revert: "valid" });
+    $( "#OYt" ).draggable({ revert: "valid" });
+    $( "#MSt" ).draggable({ revert: "valid" });
+    $( "#RYt" ).draggable({ revert: "valid" });
+    $( "#YSt" ).draggable({ revert: "valid" });
+    $( "#YAt" ).draggable({ revert: "valid" });
+    $( "#IMt" ).draggable({ revert: "valid" });
+    $( "#AHt" ).draggable({ revert: "valid" });
+
+    
+
+
+
+  } );
+
+</script>
+</body>
+</html>
