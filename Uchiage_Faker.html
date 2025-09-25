@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>プレ打ち上げ2025_チーム用Z</title>
+  <link rel="stylesheet" href="./lib/jquery-ui.css">
+  <style>
+  #app {
+    text-align: center;
+  }
+  [id^="draggable"] {
+    display: inline-block;
+    padding: 6px;
+    line-height: 1.0;
+    border: 1px solid #aaa;
+  }
+  
+  #droppable {
+    display: inline-block;
+    width:10em;
+    height: 1em;
+    padding: 6px;
+    line-height: 1.0;
+    border: 1px solid #aaa;
+  }
+  </style>
+  
+</head>
+<body bgcolor="#000000">
+<div id="app"> 
+ 
+<p style="color:#FFFFFF; font-family:cursive; font-size:20px;">クリックでタテヨコ回転</p>
+
+<img src="P3.png"></img>
+
+</div>
+
+<div style="position=relative;">
+
+<img src="NTt.png" id="NT" style="position:absolute; left:0px;"></img>
+
+<img src="OYt.png" id="OY" style="position:absolute; left:40px;"></img>
+
+<img src="MSt.png" id="MS" style="position:absolute; left:80px;"></img>
+
+<img src="RYt.png" id="RY" style="position:absolute; left:120px;"></img>
+
+<img src="YSt.png" id="YS" style="position:absolute; left:160px;"></img>
+
+<img src="YAt.png" id="YA" style="position:absolute; left:200px;"></img>
+
+<img src="IMt.png" id="IM" style="position:absolute; left:240px;"></img>
+
+<img src="AHt.png" id="AH" style="position:absolute; left:280px;"></img>
+
+</div> 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script>
+  $( function() {
+    $( "#NT" ).draggable({ revert: "valid" });
+    $( "#OY" ).draggable({ revert: "valid" });
+    $( "#MS" ).draggable({ revert: "valid" });
+    $( "#RY" ).draggable({ revert: "valid" });
+    $( "#YS" ).draggable({ revert: "valid" });
+    $( "#YA" ).draggable({ revert: "valid" });
+    $( "#IM" ).draggable({ revert: "valid" });
+    $( "#AH" ).draggable({ revert: "valid" })
+
+    $("#NT").on("click", function(){
+	if($("#NT").attr("src")=="NT.png"){
+		$("#NT").attr("src", "NTt.png");
+	}
+	else{
+		$("#NT").attr("src", "NT.png");
+	}
+    });
+
+    $("#OY").on("click", function(){
+	if($("#OY").attr("src")=="OY.png"){
+		$("#OY").attr("src", "OYt.png");
+	}
+	else{
+		$("#OY").attr("src", "OY.png");
+	}
+    });
+
+    $("#MS").on("click", function(){
+	if($("#MS").attr("src")=="MS.png"){
+		$("#MS").attr("src", "MSt.png");
+	}
+	else{
+		$("#MS").attr("src", "MS.png");
+	}
+    });
+
+    $("#RY").on("click", function(){
+	if($("#RY").attr("src")=="RY.png"){
+		$("#RY").attr("src", "RYt.png");
+	}
+	else{
+		$("#RY").attr("src", "RY.png");
+	}
+    });
+
+    $("#YS").on("click", function(){
+	if($("#YS").attr("src")=="YS.png"){
+		$("#YS").attr("src", "YSt.png");
+	}
+	else{
+		$("#YS").attr("src", "YS.png");
+	}
+    });
+
+    $("#YA").on("click", function(){
+	if($("#YA").attr("src")=="YA.png"){
+		$("#YA").attr("src", "YAt.png");
+	}
+	else{
+		$("#YA").attr("src", "YA.png");
+	}
+    });
+
+    $("#IM").on("click", function(){
+	if($("#IM").attr("src")=="IM.png"){
+		$("#IM").attr("src", "IMt.png");
+	}
+	else{
+		$("#IM").attr("src", "IM.png");
+	}
+    });
+
+    $("#AH").on("click", function(){
+	if($("#AH").attr("src")=="AH.png"){
+		$("#AH").attr("src", "AHt.png");
+	}
+	else{
+		$("#AH").attr("src", "AH.png");
+	}
+    });
+
+
+
+
+  } );
+
+</script>
+</body>
+</html>
